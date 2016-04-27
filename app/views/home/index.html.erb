@@ -13,27 +13,14 @@
     </div>
 
     <h3>Dernières séries ajoutées</h3>
-    <div class="col-md-2">
-        <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
-    <div class="col-md-2">
-        <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
-    <div class="col-md-2">
-       <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
-    <div class="col-md-2">
-       <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
-    <div class="col-md-2">
-       <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
-    <div class="col-md-2">
-       <img class="thumbnail img-responsive" alt="Bootstrap template" 
-                src="https://placeholdit.imgix.net/~text?txtsize=33&txt=200×150&w=200&h=150" />
-    </div>
+    <% if @series.any? %>
+        <ul class="all-blogs">
+        <% @series.each do |serie| %>
+            <div class="col-md-2">
+                <img class="thumbnail img-responsive" alt="<%= serie.name %>" 
+                        src="<%= serie.poster %>" />
+                <%= serie.name %>
+            </div>
+        <% end %>
+        </ul>
+    <% end %>
