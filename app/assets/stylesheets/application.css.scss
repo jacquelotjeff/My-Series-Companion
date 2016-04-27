@@ -1,4 +1,6 @@
 // app/assets/stylesheets/application.css.scss
 
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
+@import 'libraries';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'utils';
