@@ -14,7 +14,7 @@ class SeriesController < ApplicationController
 
   # GET /series/new
   def new
-    @series = Serie.new
+    @serie = Serie.new
   end
 
   # GET /series/1/edit
@@ -69,6 +69,6 @@ class SeriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def series_params
-      params.require(:series).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
+      params.require(:serie).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
     end
 end
