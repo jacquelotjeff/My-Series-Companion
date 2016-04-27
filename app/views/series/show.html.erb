@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @series.name %>
+</p>
+
+<p>
+  <strong>Overview:</strong>
+  <%= @series.overview %>
+</p>
+
+<p>
+  <strong>Banner:</strong>
+  <%= @series.banner %>
+</p>
+
+<p>
+  <strong>Poster:</strong>
+  <%= @series.poster %>
+</p>
+
+<p>
+  <strong>Runtime:</strong>
+  <%= @series.runtime %>
+</p>
+
+<p>
+  <strong>Network:</strong>
+  <%= @series.network %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @series.rating %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @series.status %>
+</p>
+
+<%= link_to 'Edit', edit_series_path(@series) %> |
+<%= link_to 'Back', series_path %>
