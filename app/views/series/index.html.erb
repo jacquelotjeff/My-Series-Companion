@@ -1,44 +1,66 @@
-<h1>Liste des series</h1>
-
-
 <div class="container">
     <div class="row">
-        <div class="well">
-            <h1 class="text-center">Liste des series</h1>
-			<p>Consultez vos series préférées.</p>
-            <div class="list-group">
-			<% if @series.any? %>
-			  <div class="list-group">
-			    <% @series.each do |serie| %>
-	                <a href="#" class="list-group-item">
-	                    <div class="media col-md-3">
-	                        <figure class="pull-left">
-	                            <i class="fa fa-cloud-upload blogicon"></i>
-	                        </figure>
-	                    </div>
-	                    <div class="col-md-6">
-	                        <h4 class="list-group-item-heading"><%= serie.name %></h4>
-	                        <p class="list-group-item-text">
-	                            <%= serie.overview %>
-	                        </p>
-	                    </div>
-	                    <div class="col-md-3 text-center">
-	                        <div class="panel panel-default">
-	                            <div class="panel-body">
-	                                <div class="ratetext">Incrementer</div>
-	                                <i class="fa fa-thumbs-o-up votes"></i><i class="fa fa-thumbs-o-down votes"></i>
-	                                <div class="stars"></div>
-	                                <h2>12 / 50<small>Episodes</small></h2>
-	                                <div id="rate1"></div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </a>
-			    <% end %>
-			  </div>
-			  <%= will_paginate @series, renderer: BootstrapPagination::Rails %>
-			<% end %>
+        <h1 class="text-center">Liste des series</h1>
+        <div class="col-md-6 col-lg-6">
+            <div class="blog-stripe">
+		        <h2>Série du moment.</h2>
+                <a href="#">
+                    <img src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg" alt="" class="feature">
+                </a>
+                <div class="block-title">
+                    <h2 class="text-center">Game Of Thrones</h2>
+                    <p class="author text-centerq"><small>John Cena</small></p>
+                </div>
             </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <h2>Vos séries.</h2>
+			<% if @series.any? %>
+            	<ul class="all-blogs">
+			    <% @series.each do |serie| %>
+	                <li class="media">
+                        <a class="pull-left" href="#">
+	                    <img src="http://images.amcnetworks.com/amc.com/wp-content/uploads/2010/12/the-walking-dead-season-6-b-key-art-michonne-gurira-rick-lincoln-alt-800x600.jpg" width="150">
+	                    </a>
+	                    <div class="media-body">
+	                        <h4 class="media-heading"><%= serie.name %></h4>
+	                        <p class="author"><%= serie.overview %></p>
+	                    </div>
+	                </li>
+			    <% end %>
+            	</ul>
+			<% end %>
+			<%= will_paginate @series, renderer: BootstrapPagination::Rails, class: "text-center" %>
         </div>
     </div>
 </div>
+
+<style>
+
+.feature {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+.author {
+    font-style: italic;
+    line-height: 1.3;
+    color: #aab6aa;
+}
+
+.blog-stripe .block-title {
+    background: black;
+    width: 100%;
+    color: white;
+    height: 100px;
+    padding-top: 20px;
+}
+
+.all-blogs .media {
+    margin-left: -40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+</style>
