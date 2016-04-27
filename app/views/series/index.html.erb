@@ -1,0 +1,44 @@
+<h1>Liste des series</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="well">
+            <h1 class="text-center">Liste des series</h1>
+			<p>Consultez vos series préférées.</p>
+            <div class="list-group">
+			<% if @series.any? %>
+			  <div class="list-group">
+			    <% @series.each do |serie| %>
+	                <a href="#" class="list-group-item">
+	                    <div class="media col-md-3">
+	                        <figure class="pull-left">
+	                            <i class="fa fa-cloud-upload blogicon"></i>
+	                        </figure>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <h4 class="list-group-item-heading"><%= serie.name %></h4>
+	                        <p class="list-group-item-text">
+	                            <%= serie.overview %>
+	                        </p>
+	                    </div>
+	                    <div class="col-md-3 text-center">
+	                        <div class="panel panel-default">
+	                            <div class="panel-body">
+	                                <div class="ratetext">Incrementer</div>
+	                                <i class="fa fa-thumbs-o-up votes"></i><i class="fa fa-thumbs-o-down votes"></i>
+	                                <div class="stars"></div>
+	                                <h2>12 / 50<small>Episodes</small></h2>
+	                                <div id="rate1"></div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </a>
+			    <% end %>
+			  </div>
+			  <%= will_paginate @series, renderer: BootstrapPagination::Rails %>
+			<% end %>
+            </div>
+        </div>
+    </div>
+</div>
