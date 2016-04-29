@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <h3>Dernières séries ajoutées</h3>
+    <h3>Dernières séries ajoutées <%= link_to("Voir toutes les séries", "/series", class: 'btn btn-primary pull-right') %></h3>
     <% if @shows.any? %>
         <ul class="all-blogs">
         <% @shows.each do |serie| %>

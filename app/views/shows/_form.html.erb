@@ -3,21 +3,24 @@
 
   <div class="form-inputs">
 
-    <%= f.input :name %>
+    <%= f.input :name, label: 'Nom de la série' %>
 
-    <%= f.input :overview %>
+    <%= f.input :overview, as: :text, label: 'Résumé' %>
 
-    <%= f.input :banner %>
+    <%= f.input :banner, as: :file, label: 'Bannière' %>
 
-    <%= f.input :poster %>
+    <%= f.input :poster, as: :file, label: 'Postère' %>
 
-    <%= f.input :runtime %>
+    <%= f.input :runtime, as: :integer, label: 'Durée' %>
 
-    <%= f.input :network %>
-
-    <%= f.input :rating %>
-
-    <%= f.input :status %>
+    <%= f.input :network, label: 'Chaine TV' %>
+    <%= f.label 'Note' %>
+    <%= f.collection_radio_buttons :rating, [[0, '1 étoile'], [1, '2 étoiles'], [3, '3 étoiles'], [4, '4 étoiles'], [5, '5 étoiles']], :first, :last %>
+  
+      <div class="form-group">
+            <%= f.label 'Statut' %>
+            <%= f.collection_radio_buttons :status, [[0, 'Fini'], [1, 'Continu']], :first, :last %>
+      </div>
 
   </div>
 

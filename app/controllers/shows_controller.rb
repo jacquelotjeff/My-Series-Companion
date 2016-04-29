@@ -28,7 +28,7 @@ class ShowsController < ApplicationController
 
     respond_to do |format|
       if @show.save
-        format.html { redirect_to @show, notice: 'Show was successfully created.' }
+        format.html { redirect_to @show, notice: 'La série a bien été créée.' }
         format.json { render :show, status: :created, location: @show }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ShowsController < ApplicationController
   def update
     respond_to do |format|
       if @show.update(show_params)
-        format.html { redirect_to @show, notice: 'Show was successfully updated.' }
+        format.html { redirect_to @show, notice: 'La série a bien été éditée.' }
         format.json { render :show, status: :ok, location: @show }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ShowsController < ApplicationController
   def destroy
     @show.destroy
     respond_to do |format|
-      format.html { redirect_to shows_url, notice: 'Show was successfully destroyed.' }
+      format.html { redirect_to shows_url, notice: 'La série a bien été supprimée.' }
       format.json { head :no_content }
     end
   end

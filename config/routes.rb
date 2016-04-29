@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   #Back
   resources :shows, path: "admin/shows"
   #Front
-  get '/shows', to: 'home#shows'
+  get '/series', to: 'home#shows'
 
 end
