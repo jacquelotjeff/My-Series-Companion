@@ -11,9 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425173502) do
+ActiveRecord::Schema.define(version: 20160429123801) do
 
   create_table "series", force: :cascade do |t|
+    t.string   "name"
+    t.string   "overview"
+    t.string   "banner"
+    t.string   "poster"
+    t.string   "runtime"
+    t.string   "network"
+    t.string   "rating"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shows", force: :cascade do |t|
     t.string   "name"
     t.string   "overview"
     t.string   "banner"

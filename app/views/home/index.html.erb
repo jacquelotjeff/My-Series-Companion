@@ -13,9 +13,9 @@
     </div>
 
     <h3>Dernières séries ajoutées</h3>
-    <% if @series.any? %>
+    <% if @shows.any? %>
         <ul class="all-blogs">
-        <% @series.each do |serie| %>
+        <% @shows.each do |serie| %>
             <div class="col-md-2">
                 <img class="thumbnail img-responsive" alt="<%= serie.name %>" 
                         src="<%= serie.poster %>" />
