@@ -1,0 +1,34 @@
+.lecteur{
+	position:relative;
+	background:#000;
+	transition:0.1s;
+	height:350px;
+	margin-bottom:20px;
+	overflow:hidden;
+}
+
+.lecteur:hover{
+	cursor:pointer;
+}
+
+.lecteur img{
+	height:100%;
+	margin-left:-40%;
+}
+
+
+.serie-desc{
+	text-transform:uppercase;
+	color:#aaa;
+}
+
+.rating{
+	margin-top:30px;
+	color:yellow;
+}
+.episode-desc{
+	padding-left:20px;
+}
+
+.episode-desc-text{
+}
