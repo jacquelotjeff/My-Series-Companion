@@ -2,7 +2,7 @@
 
 class HomeController < ApplicationController
 
-	before_action :authenticate_user!, only: [:shows]
+	before_action :authenticate_user!
 
     def index
     	@shows = Show.paginate(page: params[:page], per_page: 1)

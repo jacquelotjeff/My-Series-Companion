@@ -40,5 +40,16 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Devise mailer URL
+  config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com'",
+    :user_name => "iprubyonrails@gmail.com", # Your SMTP user here.
+    :password => "rubyonrails60", # Your SMTP password here.
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
 end

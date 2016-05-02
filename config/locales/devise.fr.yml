@@ -1,9 +1,9 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+﻿# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 fr:
   devise:
     confirmations:
-      confirmed: "Votre adresse e-mail a été validée."
+      confirmed: "Votre adresse e-mail a ete validee."
       send_instructions: "Vous allez recevoir un e-mail contenant les instructions pour le valider d'ici quelques minutes"
       send_paranoid_instructions: "Si nous connaissons votre e-mail, vous recevrez un e-mail contenant les instructions pour le confirmer."
     failure:
@@ -44,7 +44,7 @@ fr:
       updated: "Your account has been updated successfully."
     sessions:
       signed_in: "Connexion réussie."
-      signed_out: "Déconnexion réussie."
+      signed_out: "Deconnexion réussie."
       already_signed_out: "Signed out successfully."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
