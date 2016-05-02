@@ -1,47 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Liste des séries</h1>
+<div class="col-md-6">
+  <h3>Dernière série modifiée</h3>
+  <div class="blog-stripe">
+      <a href="#">
+          <img src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg" alt="" class="feature">
+      </a>
+      <div class="block-title">
+          <h2 class="text-center">Game Of Thrones</h2>
+          <p class="author text-center"><small>Episode 1 - Saison 6</small></p>
+      </div>
+  </div>
+</div>
+<div class="col-md-6 pull-right">
+<h3>Vos séries</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nom de la série</th>
-      <th>Durée</th>
-      <th>Chaîne TV</th>
-      <th>Note</th>
-      <th>Statut</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @shows.each do |show| %>
-      <tr>
-        <td><%= show.name %></td>
-        <td><%= show.runtime %></td>
-        <td><%= show.network %></td>
-        <td><%= show.rating %></td>
-        <td><%= show.status %></td>
-        <td>
-          <div class="btn-group" role="group">
-            <%= link_to show, :class => "btn btn-success" do %>
-              <span class="glyphicon glyphicon-eye-open"></span>
-            <% end %>
-            <%= link_to edit_show_path(show), :class => "btn btn-primary" do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-            <% end %>
-            <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain?' }, :class => "btn btn-danger" do %>
-              <span class="glyphicon glyphicon-trash"></span>
-            <% end %>
+      
+        <div class="row shows-item">
+          <div class="col-md-3">
+            PHOTO
           </div>
-        </td>
-      </tr>
+          <div class="col-md-5">
+            <p><%= show.name %></p>
+            <p>Episode 6 - Saison 4</p>
+            <p><%= show.rating %></p>
+          </div>
+          <div class="col-md-4">
+            <div class="btn-group pull-right shows-actions" role="group">
+              <%= link_to show, :class => "btn btn-success show" do %>
+                <span class="glyphicon glyphicon-eye-open"></span>
+              <% end %>
+              <%= link_to edit_show_path(show), :class => "btn btn-primary edit" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain?' }, :class => "btn btn-danger delete" do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <%= link_to 'Nouvelle série', new_show_path, class: "btn btn-success" %>
-
+</div>
 
