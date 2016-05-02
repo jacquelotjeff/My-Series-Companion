@@ -1,44 +1,75 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="lecteur">
+      <img src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg">
+    </div>
+  </div>
+  <div class="col-md-5">
+    <h2><%= @show.name %></h2>
 
-<p>
-  <strong>Nom:</strong>
-  <%= @show.name %>
-</p>
+    <p>
+      Durée: <%= @show.runtime %> min.
+    </p>
+    <br/>
+    <p><span class="serie-desc">Réalisateur</span>  Jacob Gentry</p>
+    <p><span class="serie-desc">Scénariste</span> Jacob Gentry</p>
+    <p><span class="serie-desc">Acteurs</span> Chad McKnight, Brianne Davis, AJ Bowen, Scott Poythress, Michael Ironside</p>
+    <p>
+      <strong>Résumé:</strong>
+      <%= @show.overview %>
+    </p>
 
-<p>
-  <strong>Résume:</strong>
-  <%= @show.overview %>
-</p>
+    <%= link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
+    <%= link_to 'Retour', shows_path, class: 'btn btn-default' %>
+  </div>
+  <div class="col-md-3">
 
-<p>
-  <strong>Bannière:</strong>
-  <%= @show.banner %>
-</p>
+    <% if @show.status == '1' %>
+      <h2>En production</h2>
+    <% else %>
+      <h2>Arrêtée</h2>
+    <% end %>
+    <div class="rating">
+      <% case @show.rating 
+         when '1' %>
+         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% when '2' %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% when '3' %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% when '4' %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% when '5' %>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <% end %>
+    </div>
 
-<p>
-  <strong>Postère:</strong>
-  <%= @show.poster %>
-</p>
+    <h3><%= @show.network %></h3>
 
-<p>
-  <strong>Durée:</strong>
-  <%= @show.runtime %>
-</p>
-
-<p>
-  <strong>Chaîne TV:</strong>
-  <%= @show.network %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @show.rating %>
-</p>
-
-<p>
-  <strong>Statut:</strong>
-  <%= @show.status %>
-</p>
-
-<%= link_to 'Éditer', edit_show_path(@show) %> |
-<%= link_to 'Retour', shows_path %>
+  </div>
+</div>
+<div class="row">
+  <h3>Saison 1</h3>
+  <div class="col-md-12">
+    <div class="episode">
+      <div class="col-md-2">
+        <img src="http://placehold.it/190x100">
+      </div>
+      <div class="col-md-7 episode-desc">
+        <h4>Episode X: Un monde nouveau</h4>
+        <div class="episode-desc-text">C'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivant</div>
+      </div>
+    </div>
+  </div>
+</div>
