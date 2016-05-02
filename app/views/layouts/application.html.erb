@@ -23,19 +23,52 @@
 				<a class="navbar-brand" href="#">My Series Companion</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
+				<% if not user_signed_in? %>
+					<!--
+					<form class="navbar-form navbar-right">
+							
+						<div class="form-group">
+							<input type="text" placeholder="Email" class="form-control">
+						</div>
+						<div class="form-group">
+							<input type="password" placeholder="Password" class="form-control">
+						</div>
+						<button type="submit" class="btn btn-success">Connexion</button>
+					</form>
+					-->
+					<%= form_for(:user, :url => session_path(:user), html: { class: "navbar-form navbar-right"}) do |f| %>
+					  <div class="form-group">
+					  	<%= f.text_field :email, placeholder: "Email", class: "form-control" %>
+					  </div>
+					  <div class="form-group">
+					  	<%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+					  </div>
+					  <%#
+					  <%= f.check_box :remember_me %>
+					  <%#
+					  <%= f.label :remember_me %>
+					  <%= f.submit 'Connexion', class: "btn btn-success" %>
+					  <%#
+					  <%= link_to "Forgot your password?", new_password_path(:user) %>
+					<% end %>
+				<% else %>
+					<div class="navbar-right">
+						<p class="navbar-text">Connecté en tant que <%= current_user.email %></p>
+						<%= link_to 'Deconnexion', destroy_user_session_path, class: 'btn btn-danger navbar-btn', :method => :delete %>
 					</div>
-					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-success">Connexion</button>
-				</form>
+				<% end %>
 			</div>
 		</div>
 	</nav>
 	<div class="content-website">
+		<%# Alerts message for Devise %>
+		<% if notice %>
+			<p class="notice"><%= notice %></p>
+		<% end %>
+		<% if alert %>
+			<p class="alert"><%= alert %></p>
+		<% end %>
+		<%# Yield allows override page content %>
 		<%= yield %>
 	</div>
 	</div>
