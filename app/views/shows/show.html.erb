@@ -60,16 +60,22 @@
   </div>
 </div>
 <div class="row">
-  <h3>Saison 1</h3>
-  <div class="col-md-12">
-    <div class="episode">
-      <div class="col-md-2">
-        <img src="http://placehold.it/190x100">
+  <% if @show.seasons.any? %>
+    <% for season in @show.seasons %>
+      <h3>Saison <%= season.num %></h3>
+      <div class="col-md-12">
+        <div class="episode">
+          <div class="col-md-2">
+            <img src="http://placehold.it/190x100">
+          </div>
+          <div class="col-md-7 episode-desc">
+            <h4>Episode X: Un monde nouveau</h4>
+            <div class="episode-desc-text">C'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivant</div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-7 episode-desc">
-        <h4>Episode X: Un monde nouveau</h4>
-        <div class="episode-desc-text">C'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivant</div>
-      </div>
-    </div>
-  </div>
+    <% end %>
+  <% else %>
+    Pas de saisons pour cette série.
+  <% end %>
 </div>

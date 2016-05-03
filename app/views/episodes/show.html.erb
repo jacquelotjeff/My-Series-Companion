@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @episode.name %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @episode.number %>
+</p>
+
+<p>
+  <strong>Firstaired:</strong>
+  <%= @episode.firstaired %>
+</p>
+
+<p>
+  <strong>Overview:</strong>
+  <%= @episode.overview %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @episode.rating %>
+</p>
+
+<p>
+  <strong>Ratingcount:</strong>
+  <%= @episode.ratingcount %>
+</p>
+
+<p>
+  <strong>Season:</strong>
+  <%= @episode.season %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @episode.filename %>
+</p>
+
+<p>
+  <strong>Serie:</strong>
+  <%= @episode.season.show.name %>
+</p>
+
+<%= link_to 'Edit', edit_episode_path(@episode) %> |
+<%= link_to 'Back', episodes_path %>
