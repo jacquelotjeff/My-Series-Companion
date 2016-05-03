@@ -22,6 +22,15 @@
 	color:#aaa;
 }
 
+.episode{
+	border-bottom:1px solid #ccc;
+}
+.episode:hover{
+	background-color:#ddd;
+}
+.episode img{
+	margin-left:-30px;
+}
 .rating{
 	margin-top:30px;
 	color:yellow;
@@ -31,4 +40,14 @@
 }
 
 .episode-desc-text{
+	overflow: hidden;
+	height:61px;
+}
+
+.valid-episode{
+	margin-top:33px;
+}
+
+.valided{
+	color: #00ff00;
 }
