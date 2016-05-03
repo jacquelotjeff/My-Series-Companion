@@ -19,12 +19,12 @@
   
       <div class="form-group">
             <%= f.label 'Statut' %>
-            <%= f.collection_radio_buttons :status, [[0, 'Fini'], [1, 'Continu']], :first, :last %>
+            <%= f.collection_radio_buttons :status, [[0, 'Fini'], [1, 'En production']], :first, :last %>
       </div>
 
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Enregistrer'  %>
   </div>
 <% end %>

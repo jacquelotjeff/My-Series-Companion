@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="col-md-6">
+<div class="col-xs-12 col-sm-5 col-md-6">
   <h3>Dernière série modifiée</h3>
   <div class="blog-stripe">
       <a href="#">
@@ -12,29 +12,29 @@
       </div>
   </div>
 </div>
-<div class="col-md-6 pull-right">
+<div class="col-xs-12 col-sm-7 col-md-6 pull-right">
 <h3>Vos séries</h1>
 
     <% @shows.each do |show| %>
       
         <div class="row shows-item">
-          <div class="col-md-3">
-            PHOTO
+          <div class="col-xs-3">
+            <img class="img-thumbnail img-responsive" src="http://placehold.it/190x100">
           </div>
-          <div class="col-md-5">
+          <div class="col-xs-5">
             <p><%= show.name %></p>
             <p class="author">Episode 6 - Saison 4</p>
             <p><%= show.rating %></p>
           </div>
-          <div class="col-md-4">
+          <div class="col-xs-4">
             <div class="btn-group pull-right shows-actions" role="group">
-              <%= link_to show, :class => "btn btn-success show" do %>
+              <%= link_to show, :class => "btn btn-sm btn-success show" do %>
                 <span class="glyphicon glyphicon-eye-open"></span>
               <% end %>
-              <%= link_to edit_show_path(show), :class => "btn btn-primary edit" do %>
+              <%= link_to edit_show_path(show), :class => "btn btn-sm btn-primary edit" do %>
                 <span class="glyphicon glyphicon-pencil"></span>
               <% end %>
-              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain?' }, :class => "btn btn-danger delete" do %>
+              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain?' }, :class => "btn btn-sm btn-danger delete" do %>
                 <span class="glyphicon glyphicon-trash"></span>
               <% end %>
             </div>

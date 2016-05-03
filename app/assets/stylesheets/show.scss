@@ -1,21 +1,6 @@
-.lecteur{
-	position:relative;
-	background:#000;
-	transition:0.1s;
-	height:350px;
-	margin-bottom:20px;
-	overflow:hidden;
-}
-
 .lecteur:hover{
 	cursor:pointer;
 }
-
-.lecteur img{
-	height:100%;
-	margin-left:-40%;
-}
-
 
 .serie-desc{
 	text-transform:uppercase;
@@ -29,7 +14,7 @@
 	background-color:#ddd;
 }
 .episode img{
-	margin-left:-30px;
+	margin-left:-13px;
 }
 .rating{
 	margin-top:30px;
@@ -50,4 +35,7 @@
 
 .valided{
 	color: #00ff00;
+}
+.episode img{
+	margin-top:20%;
 }
