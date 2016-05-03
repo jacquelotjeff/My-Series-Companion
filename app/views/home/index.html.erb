@@ -15,15 +15,12 @@
         </div>
     <% end %>
 
-    <h3>Dernières séries ajoutées <%= link_to("Voir toutes les séries", "/series", class: 'btn btn-primary pull-right') %></h3>
-    <% if @shows.any? %>
-        <ul class="all-blogs">
-        <% @shows.each do |serie| %>
-            <div class="col-md-2">
-                <img class="thumbnail img-responsive" alt="<%= serie.name %>" 
-                        src="<%= serie.poster %>" />
-                <%= serie.name %>
-            </div>
-        <% end %>
-        </ul>
+    <h3>Derniers membres inscrits</h3>
+    <ul class="row last-members list-group">
+    <% for i in 0..5 do %>
+        <li class="col-md-2">
+            <img class="img-responsive" alt="" 
+                    src="https://placeholdit.imgix.net/~text?txtsize=33&txt=150%C3%97150&w=150&h=150" />
+        </li>
     <% end %>
+    </ul>
