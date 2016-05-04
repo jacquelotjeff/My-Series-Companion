@@ -14,8 +14,7 @@ class ApiShowService
       options = { query: {seriesname: series_name, language: 'fr'} }
       response = self.class.get("/GetSeries.php", options)
       
-      if response['Data'].blank? || response['Data']['Series'].blank?
-      	 || response['Data']['Series'].blank?
+      if response['Data'].blank? || response['Data']['Series'].blank? || response['Data']['Series'].blank?
           return []
       else
       	return response["Data"]['Series'].first

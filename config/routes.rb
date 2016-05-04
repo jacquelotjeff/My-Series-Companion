@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :episodes
-  post '/episodes/:id', to: 'episodes#viewed', as: 'viewed'
+  get '/episodes/viewed/:id', to: 'episodes#viewed', as: 'viewed'
   resources :seasons
   devise_for :users
   #Home page application

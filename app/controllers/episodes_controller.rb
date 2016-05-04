@@ -64,13 +64,15 @@ class EpisodesController < ApplicationController
   # PATCH/PUT /episodes/1
   # PATCH/PUT /episodes/1.json
   def viewed
-    if @episode.update_attribute(:viewed, 1)
-        format.html { redirect_to @episode.show, notice: 'Episode #{@episode.name} marqué comme vu.' }
+    @episode.users << current_user
+    @episode.save
+    # TODO REDIRECT BON TRUC STP JONATHAN
+    
+    respond_to do |format|
+        format.html { redirect_to @episode.show }
         format.json { render :show, status: :ok, location: @episode }
-      else
-        format.html { render :edit }
-        format.json { render json: @episode.errors, status: :unprocessable_entity }
-      end
+    end
+
   end
 
   private
