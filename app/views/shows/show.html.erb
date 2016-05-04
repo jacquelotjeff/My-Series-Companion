@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-sm-4 hidden-xs">
     <div class="lecteur">
-      <img src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg">
+      <img class="img-thumbnail img-responsive" src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg">
     </div>
   </div>
-  <div class="col-md-5">
-    <h2><%= @show.name %></h2>
+  <div class="col-xs-5 col-sm-offset-0 col-xs-offset-2">
+    <h2><%= @show.name %> <%= link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
+    <%= link_to 'Retour', shows_path, class: 'btn btn-default' %></h2>
 
     <p>
       Durée: <%= @show.runtime %> min.
@@ -20,8 +21,6 @@
       <%= @show.overview %>
     </p>
 
-    <%= link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
-    <%= link_to 'Retour', shows_path, class: 'btn btn-default' %>
   </div>
   <div class="col-md-3">
 
@@ -63,17 +62,28 @@
   <% if @show.seasons.any? %>
     <% for season in @show.seasons %>
       <h3>Saison <%= season.num %></h3>
-      <div class="col-md-12">
-        <div class="episode">
-          <div class="col-md-2">
-            <img src="http://placehold.it/190x100">
+      <% if season.episodes.any? %>
+        <% for episode in season.episodes %>
+          <div class="col-xs-12 episode">
+            <div class="col-md-1 col-sm-2 hidden-xs">
+              <% if episode.filename %>
+                <img class="img-thumbnail img-responsive" src="<%= episode.filename %>">
+              <% end %>
+            </div>
+            <div class="col-xs-8 episode-desc">
+              <h4>Episode <%= episode.number %>: <%= episode.name %></h4>
+              <div class="episode-desc-text"><%= episode.overview %></div>
+            </div>
+            <div class="col-xs-3 col-sm-2">
+                <!-- La classe "valided" du bouton est à entourée d'un if : <%# if episode is valided %> valided <%# end %>-->
+                <!-- pas encore d'attribut valided sur l'episode -->
+                <button type="button" class="btn btn-default pull-right valid-episode valided">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </button>     
+            </div>
           </div>
-          <div class="col-md-7 episode-desc">
-            <h4>Episode X: Un monde nouveau</h4>
-            <div class="episode-desc-text">C'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivantC'est lhistoire de sept royaumes en guerres les uns contre les autres avec des dragons et des morts vivant</div>
-          </div>
-        </div>
-      </div>
+        <% end %>
+      <% end %>
     <% end %>
   <% else %>
     Pas de saisons pour cette série.
