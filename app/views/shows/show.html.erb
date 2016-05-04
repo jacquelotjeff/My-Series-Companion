@@ -55,9 +55,7 @@
             <div class="col-xs-3 col-sm-2">
                 <!-- La classe "valided" du bouton est à entourée d'un if : <%# if episode is valided %> valided <%# end %>-->
                 <!-- pas encore d'attribut valided sur l'episode -->
-                <button type="button" class="btn btn-default pull-right valid-episode valided">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>     
+                    <%= link_to '', viewed_path(episode), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
             </div>
           </div>
         <% end %>

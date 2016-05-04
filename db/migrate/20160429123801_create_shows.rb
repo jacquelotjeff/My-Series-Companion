@@ -9,6 +9,7 @@ class CreateShows < ActiveRecord::Migration
       t.string :network
       t.string :rating
       t.string :status
+      t.integer :idapi
 
       t.timestamps null: false
     end
