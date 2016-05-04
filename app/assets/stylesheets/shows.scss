@@ -36,8 +36,16 @@
 	padding-bottom:15px;
 }
 
+.side-shows{
+	position:relative;
+}
+.side-shows .rating{
+	margin-top:44px;
+}
 .shows-actions {
 	margin-top:-15px;
+	position:absolute;
+	right:15px;
 }
 
 .shows-actions .show, .shows-actions .edit, .shows-actions .delete{
