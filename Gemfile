@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.6'
+gem 'rails-i18n', '~> 4.0.O'
 gem 'sqlite3'
 gem 'tzinfo-data'
 gem 'sass-rails', '~> 5.0'
