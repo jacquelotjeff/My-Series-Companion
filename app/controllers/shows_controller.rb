@@ -1,23 +1,18 @@
 class ShowsController < ApplicationController
+  require 'api_show_service'
+
   before_action :set_show, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
-  def initialize()
-    @options = { query: {seriesname: 'the walking dead', language: 'fr'} }
-  end
 
   # GET /shows
   # GET /shows.json
   def index
-    @shows = Show.all
+      @shows = Show.all
   end
 
   # GET /shows/1
   # GET /shows/1.json
   def show
-      response = HTTParty.get("http://www.thetvdb.com/api/GetSeries.php", @options)
-      
-      @client = response["Data"]['Series'].first['seriesid']
   end
 
   # GET /shows/new
@@ -32,51 +27,73 @@ class ShowsController < ApplicationController
   # POST /shows
   # POST /shows.json
   def create
-    @show = Show.new(show_params)
+      search_show params[:show][:name]
 
-    respond_to do |format|
-      if @show.save
-        format.html { redirect_to @show, notice: 'La série a bien été créée.' }
-        format.json { render :show, status: :created, location: @show }
-      else
-        format.html { render :new }
-        format.json { render json: @show.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @show.nil?
+            flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
+            redirect_to shows_path
+            return []
+        end
+
+        if @show.save
+            flash[:success] = 'La série a bien été créée.'
+            format.html { redirect_to @show }
+            format.json { render :show, status: :created, location: @show }
+        else
+            format.html { render :new }
+            format.json { render json: @show.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # PATCH/PUT /shows/1
   # PATCH/PUT /shows/1.json
   def update
-    respond_to do |format|
-      if @show.update(show_params)
-        format.html { redirect_to @show, notice: 'La série a bien été éditée.' }
-        format.json { render :show, status: :ok, location: @show }
-      else
-        format.html { render :edit }
-        format.json { render json: @show.errors, status: :unprocessable_entity }
+      respond_to do |format|
+          if @show.update(show_params)
+            flash[:success] = 'La série a bien été éditée.'
+            format.html { redirect_to @show }
+            format.json { render :show, status: :ok, location: @show }
+          else
+            format.html { render :edit }
+            format.json { render json: @show.errors, status: :unprocessable_entity }
+          end
       end
-    end
   end
 
   # DELETE /shows/1
   # DELETE /shows/1.json
   def destroy
-    @show.destroy
-    respond_to do |format|
-      format.html { redirect_to shows_url, notice: 'La série a bien été supprimée.' }
-      format.json { head :no_content }
-    end
+      @show.destroy
+      respond_to do |format|
+        flash[:success] = 'La série a bien été supprimée.'
+        format.html { redirect_to shows_url }
+        format.json { head :no_content }
+      end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_show
-      @show = Show.find(params[:id])
-    end
+      def search_show serie_name
+          search = ApiShowService.new().search(params[:show][:name])
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def show_params
-      params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
-    end
+          if search.any?
+              serieName = search['SeriesName']
+              serieOverview = search['Overview']
+              serieNetwork = search['Network']
+              serieBanner = search['banner']
+
+              @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner
+          end
+      end  
+
+      # Use callbacks to share common setup or constraints between actions.
+      def set_show
+        @show = Show.find(params[:id])
+      end
+
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def show_params
+        params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
+      end
 end
