@@ -1,77 +1,76 @@
 /* Form Module */
 .form-module {
-  position: relative;
-
-  background: #ffffff;
-  max-width: 320px;
-  width: 100%;
-  border-top: 5px solid #33b5e5;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
--moz-box-shadow: 4px 4px 4px 0px #999999;
--webkit-box-shadow: 4px 4px 4px 0px #999999;
--o-box-shadow: 4px 4px 4px 0px #999999;
-box-shadow: 4px 4px 4px 0px #999999;
-filter:progid:DXImageTransform.Microsoft.Shadow(color=#999999, Direction=134, Strength=4);
-margin-top:10%;
+    position: relative;
+    background: #ffffff;
+    max-width: 320px;
+    width: 100%;
+    border-top: 5px solid #33b5e5;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    -moz-box-shadow: 4px 4px 4px 0px #999999;
+    -webkit-box-shadow: 4px 4px 4px 0px #999999;
+    -o-box-shadow: 4px 4px 4px 0px #999999;
+    box-shadow: 4px 4px 4px 0px #999999;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#999999, Direction=134, Strength=4);
+    margin-top: 5%;
 }
 
 .form-module .form {
-  display: block;
-  padding: 40px;
+    display: block;
+    padding: 40px;
 
 }
 .form-module h2 {
-  margin: 0 0 20px;
-  color: #33b5e5;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 1;
+    margin: 0 0 20px;
+    color: #33b5e5;
+    font-size: 23px;
+    font-weight: 400;
+        line-height: 1;
 }
 .form-module input {
-  outline: none;
-  display: block;
-  width: 100%;
-  border: 1px solid #d9d9d9;
-  margin: 0 0 20px;
-  padding: 5px 15px;
-  box-sizing: border-box;
-  font-wieght: 400;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+    outline: none;
+    display: block;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    margin: 0 0 20px;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    font-wieght: 400;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
 }
 .form-module input:focus {
-  border: 1px solid #33b5e5;
-  color: #333333;
+    border: 1px solid #33b5e5;
+    color: #333333;
 }
 .form-module .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: -5px;
-     margin-top: 3px;
+    margin-top: 3px;
     position: absolute;
 }
 .form-module button {
-  cursor: pointer;
-  background: #33b5e5;
-  width: 100%;
-  border: 0;
-  padding: 5px 15px;
-  color: #ffffff;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+    cursor: pointer;
+    background: #33b5e5;
+    width: 100%;
+    border: 0;
+    padding: 5px 15px;
+    color: #ffffff;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
 }
 .form-module button:hover {
-  background: #178ab4;
+    background: #178ab4;
 }
 .form-module .cta {
-  background: #f2f2f2;
-  width: 100%;
-  padding: 15px 40px;
-  box-sizing: border-box;
-  color: #666666;
-  font-size: 13px;
-  text-align: center;
+    background: #f2f2f2;
+    width: 100%;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    color: #666666;
+    font-size: 13px;
+    text-align: center;
 }
 .form-module .cta a {
-  color: #333333;
-  text-decoration: none;
+    color: #333333;
+    text-decoration: none;
 }
