@@ -1,27 +1,22 @@
-.lecteur{
-	position:relative;
-	background:#000;
-	transition:0.1s;
-	height:350px;
-	margin-bottom:20px;
-	overflow:hidden;
-}
-
 .lecteur:hover{
 	cursor:pointer;
 }
-
-.lecteur img{
-	height:100%;
-	margin-left:-40%;
-}
-
 
 .serie-desc{
 	text-transform:uppercase;
 	color:#aaa;
 }
 
+.episode{
+	border-bottom:1px solid #ccc;
+	transition:0.3s;
+}
+.episode:hover{
+	background-color:#ddd;
+}
+.episode img{
+	margin-left:-13px;
+}
 .rating{
 	margin-top:30px;
 	color:yellow;
@@ -31,4 +26,17 @@
 }
 
 .episode-desc-text{
+	overflow: hidden;
+	height:61px;
+}
+
+.valid-episode{
+	margin-top:33px;
+}
+
+.valided{
+	color: #00ff00;
+}
+.episode img{
+	margin-top:20%;
 }

@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Num:</strong>
+  <%= @season.num %>
+</p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @season.show.name %>
+</p>
+
+<% if @season.episodes.any? %>
+    <% for episode in @season.episodes %>
+    	<%= episode.name %>
+    <% end %>
+  <% else %>
+    Pas de saisons pour cette série.
+  <% end %>
+
+<%= link_to 'Edit', edit_season_path(@season) %> |
+<%= link_to 'Back', seasons_path %>
