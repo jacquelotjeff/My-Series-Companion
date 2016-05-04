@@ -30,28 +30,7 @@
       <h2>Arrêtée</h2>
     <% end %>
     <div class="rating">
-      <% case @show.rating 
-         when '1' %>
-         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <% when '2' %>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <% when '3' %>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <% when '4' %>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <% when '5' %>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <% end %>
+      <%= render partial: 'shows/rating', locals: { show: @show } %>
     </div>
 
     <h3><%= @show.network %></h3>
