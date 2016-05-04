@@ -2,10 +2,6 @@ class ShowsController < ApplicationController
   before_action :set_show, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  def initialize()
-    @options = { query: {seriesname: 'the walking dead', language: 'fr'} }
-  end
-
   # GET /shows
   # GET /shows.json
   def index
@@ -15,9 +11,6 @@ class ShowsController < ApplicationController
   # GET /shows/1
   # GET /shows/1.json
   def show
-      response = HTTParty.get("http://www.thetvdb.com/api/GetSeries.php", @options)
-      
-      @client = response["Data"]['Series'].first['seriesid']
   end
 
   # GET /shows/new
