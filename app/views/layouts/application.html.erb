@@ -24,6 +24,11 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<% if user_signed_in? %>
+					<ul class="nav navbar-nav">
+						<li>
+							<%= link_to 'Mes séries', shows_path %>
+						</li>
+					</ul>
 					<div class="navbar-right">
 						<p class="navbar-text">Bienvenue <%= current_user.email %></p>
 						<%= link_to 'Deconnexion', destroy_user_session_path, class: 'btn btn-danger navbar-btn btn-xs', :method => :delete %>
@@ -34,11 +39,11 @@
 	</nav>
 	<div class="content-website">
 		<%# Alerts message for Devise %>
-		<% if notice %>
-			<div class="alert alert-success alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <%= notice %></div>
-		<% end %>
-		<% if alert %>
-			<div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <%= alert %></div>
+		<% flash.each do |name, msg| -%>
+			<div class="alert alert-info alert-<%= name %>">
+				<a class="close" data-dismiss="alert">x</a>
+				<%= content_tag :div, msg, id: "flash_#{name}" %>
+			</div>
 		<% end %>
 		<%# Yield allows override page content %>
 		<%= yield %>

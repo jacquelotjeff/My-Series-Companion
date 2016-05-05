@@ -50,35 +50,35 @@
 
 .shows-actions .show, .shows-actions .edit, .shows-actions .delete{
 	visibility:hidden;
-	transition:0.3s;
+	transition:0.1s;
 	opacity:0;
 }
 
 .shows-item:hover .shows-actions{
-	transition:0.3s;
+	transition:0.1s;
 	visibility:visible;
 	opacity:1;
 }
 
 .shows-item:hover .shows-actions .show{
 	margin-top:25px;
-	transition:0.3s;
+	transition:0.1s;
 	visibility:visible;
 	opacity:1;
 }
 
 .shows-item:hover .shows-actions .edit{
 	margin-top:25px;
-	transition:0.3s;
-	transition-delay:0.15s;
+	transition:0.1s;
+	transition-delay:0.05s;
 	visibility:visible;
 	opacity:1;
 }
 
 .shows-item:hover .shows-actions .delete{
 	margin-top:25px;
-	transition:0.3s;
-	transition-delay:0.3s;
+	transition:0.1s;
+	transition-delay:0.1s;
 	visibility:visible;
 	opacity:1;
 }

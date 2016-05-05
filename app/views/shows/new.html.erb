@@ -1,5 +1,12 @@
 <h1>Nouvelle série</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@show) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= f.input :name, label: 'Nom de la série' %>
+  <div class="form-actions">
+    <%= f.button :submit, 'Rechercher et ajouter la série' %>
+  </div>
+<% end %>
 
 <%= link_to 'Retour', shows_path %>

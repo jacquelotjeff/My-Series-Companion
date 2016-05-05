@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-4 hidden-xs">
     <div class="lecteur">
-      <img class="img-thumbnail img-responsive" src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg">
+      <img class="img-thumbnail img-responsive" src="http://thetvdb.com/banners/<%= @show.banner %>">
     </div>
   </div>
   <div class="col-xs-5 col-sm-offset-0 col-xs-offset-2">
@@ -55,9 +55,18 @@
             <div class="col-xs-3 col-sm-2">
                 <!-- La classe "valided" du bouton est à entourée d'un if : <%# if episode is valided %> valided <%# end %>-->
                 <!-- pas encore d'attribut valided sur l'episode -->
-                <button type="button" class="btn btn-default pull-right valid-episode valided">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </button>     
+                    <%= link_to '', viewed_path(episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
+            </div>
+            <div>
+              Liste des utilisateurs qui ont lu l'épisode: 
+              <% if episode.users.any? %>
+              <%# moves.map(&:name).join(', ') %>
+                <%= episode.users.map { |m| m.email }
+                  .join(', ')
+                  .html_safe %>
+                <% else %>
+                  &empty;
+                <% end %>
             </div>
           </div>
         <% end %>
