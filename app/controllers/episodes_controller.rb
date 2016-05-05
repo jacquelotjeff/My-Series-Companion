@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :edit, :update, :destroy]
+  before_action :set_episode, only: [:show, :edit, :update, :destroy, :viewed]
 
   # GET /episodes
   # GET /episodes.json
@@ -59,6 +59,20 @@ class EpisodesController < ApplicationController
       format.html { redirect_to episodes_url, notice: 'Episode was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # PATCH/PUT /episodes/1
+  # PATCH/PUT /episodes/1.json
+  def viewed
+    @episode.users << current_user
+    @episode.save
+    # TODO REDIRECT BON TRUC STP JONATHAN
+    
+    respond_to do |format|
+        format.html { redirect_to @episode.show }
+        format.json { render :show, status: :ok, location: @episode }
+    end
+
   end
 
   private

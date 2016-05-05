@@ -9,6 +9,7 @@ class CreateEpisodes < ActiveRecord::Migration
       t.integer :ratingcount
       t.references :season, index: true, foreign_key: true
       t.string :filename
+      t.integer :idapi
 
       t.timestamps null: false
     end

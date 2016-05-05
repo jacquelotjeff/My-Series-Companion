@@ -1,0 +1,42 @@
+.lecteur:hover{
+	cursor:pointer;
+}
+
+.serie-desc{
+	text-transform:uppercase;
+	color:#aaa;
+}
+
+.episode{
+	border-bottom:1px solid #ccc;
+	transition:0.3s;
+}
+.episode:hover{
+	background-color:#ddd;
+}
+.episode img{
+	margin-left:-13px;
+}
+.rating{
+	margin-top:30px;
+	color:yellow;
+}
+.episode-desc{
+	padding-left:20px;
+}
+
+.episode-desc-text{
+	overflow: hidden;
+	height:61px;
+}
+
+.valid-episode{
+	margin-top:33px;
+}
+
+.valided{
+	color: #00ff00;
+}
+.episode img{
+	margin-top:20%;
+}

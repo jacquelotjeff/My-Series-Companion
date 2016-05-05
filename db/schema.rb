@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503145825) do
+ActiveRecord::Schema.define(version: 20160504141951) do
 
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20160503145825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_episodes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "episode_id"
+    t.boolean  "viewed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_episodes", ["episode_id"], name: "index_user_episodes_on_episode_id"
+  add_index "user_episodes", ["user_id"], name: "index_user_episodes_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
