@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-      @shows = Show.all
+      #@shows = Show.all
   end
 
   # GET /shows/1
@@ -37,6 +37,7 @@ class ShowsController < ApplicationController
         end
 
         if @show.save
+            add_show_current_user(@show)
             flash[:success] = 'La série a bien été créée.'
             format.html { redirect_to @show }
             format.json { render :show, status: :created, location: @show }
@@ -86,6 +87,14 @@ class ShowsController < ApplicationController
               @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner
           end
       end  
+
+      def add_show_current_user(show)
+        if current_user
+           current_user.shows << show
+        else
+           redirect_to root, notice: 'Veuillez vous connecter.'
+        end
+      end
 
       # Use callbacks to share common setup or constraints between actions.
       def set_show
