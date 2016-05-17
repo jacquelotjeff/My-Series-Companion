@@ -4,10 +4,10 @@
   <h3>Dernière série modifiée</h3>
   <div class="blog-stripe">
       <a href="#">
-          <img src="http://www.edilivre.com/media/blog/2013/07/game-of-thrones-season-4.jpg" alt="" class="feature">
+          <img src="<%= poster(@shows.last) %>" alt="" class="feature">
       </a>
       <div class="block-title">
-          <h2 class="text-center">Game Of Thrones</h2>
+          <h2 class="text-center"><%= @shows.last.name %></h2>
           <p class="author text-center"><small>Episode 1 - Saison 6</small></p>
       </div>
   </div>

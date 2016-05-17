@@ -76,15 +76,27 @@ class ShowsController < ApplicationController
 
   private
       def search_show serie_name
-          search = ApiShowService.new().search(params[:show][:name])
+          apiShowService = ApiShowService.new()
+          
+          search = apiShowService.search(params[:show][:name])
 
           if search.any?
               serieName = search['SeriesName']
               serieOverview = search['Overview']
               serieNetwork = search['Network']
               serieBanner = search['banner']
+              serieDbtvId = search['seriesid']
 
-              @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner
+              infos = apiShowService.more_infos(serieDbtvId)
+
+              seriePoster = infos['poster']
+              serieRuntime = infos['Runtime']
+              serieRating = infos['Rating']
+              serieStatus = infos['Status']
+
+
+              @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner, 
+                                  poster: seriePoster, runtime: serieRuntime, rating: serieRating, status: serieStatus
           end
       end  
 

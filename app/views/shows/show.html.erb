@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-4 hidden-xs">
     <div class="lecteur">
-      <img class="img-thumbnail img-responsive" src="http://thetvdb.com/banners/<%= @show.banner %>">
+      <img class="img-thumbnail img-responsive" src="<%= poster(@show) %>">
     </div>
   </div>
   <div class="col-xs-5 col-sm-offset-0 col-xs-offset-2">
@@ -23,7 +23,7 @@
   </div>
   <div class="col-md-3">
 
-    <% if @show.status == '1' %>
+    <% if @show.status == 'Continuing' %>
       <h2>En production</h2>
     <% else %>
       <h2>Arrêtée</h2>
