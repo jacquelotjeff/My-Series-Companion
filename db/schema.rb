@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504141951) do
+ActiveRecord::Schema.define(version: 20160517144347) do
 
   create_table "episodes", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160504141951) do
     t.integer  "ratingcount"
     t.integer  "season_id"
     t.string   "filename"
+    t.integer  "idapi"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -36,6 +37,19 @@ ActiveRecord::Schema.define(version: 20160504141951) do
   end
 
   add_index "seasons", ["show_id"], name: "index_seasons_on_show_id"
+
+  create_table "series", force: :cascade do |t|
+    t.string   "name"
+    t.string   "overview"
+    t.string   "banner"
+    t.string   "poster"
+    t.string   "runtime"
+    t.string   "network"
+    t.string   "rating"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "shows", force: :cascade do |t|
     t.string   "name"
@@ -60,6 +74,16 @@ ActiveRecord::Schema.define(version: 20160504141951) do
 
   add_index "user_episodes", ["episode_id"], name: "index_user_episodes_on_episode_id"
   add_index "user_episodes", ["user_id"], name: "index_user_episodes_on_user_id"
+
+  create_table "user_shows", force: :cascade do |t|
+    t.integer  "show_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_shows", ["show_id"], name: "index_user_shows_on_show_id"
+  add_index "user_shows", ["user_id"], name: "index_user_shows_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
