@@ -38,7 +38,6 @@ class ShowsController < ApplicationController
 
         if @show.save
             add_show_current_user(@show)
-            flash[:success] = 'La série a bien été créée.'
             format.html { redirect_to @show }
             format.json { render :show, status: :created, location: @show }
         else
@@ -66,7 +65,9 @@ class ShowsController < ApplicationController
   # DELETE /shows/1
   # DELETE /shows/1.json
   def destroy
-      @show.destroy
+    @userShow = UserShow.find_by user: current_user, show: @show
+    @userShow.destroy
+    
       respond_to do |format|
         flash[:success] = 'La série a bien été supprimée.'
         format.html { redirect_to shows_url }
@@ -81,28 +82,43 @@ class ShowsController < ApplicationController
           search = apiShowService.search(params[:show][:name])
 
           if search.any?
-              serieName = search['SeriesName']
-              serieOverview = search['Overview']
-              serieNetwork = search['Network']
-              serieBanner = search['banner']
-              serieDbtvId = search['seriesid']
+              
+              idapi = search['seriesid']
+              exist = Show.find_by idapi: idapi
 
-              infos = apiShowService.more_infos(serieDbtvId)
+              if exist
+                @show = exist
+              else 
+                serieName = search['SeriesName']
+                serieOverview = search['Overview']
+                serieNetwork = search['Network']
+                serieBanner = search['banner']
 
-              seriePoster = infos['poster']
-              serieRuntime = infos['Runtime']
-              serieRating = infos['Rating']
-              serieStatus = infos['Status']
+                infos = apiShowService.more_infos(idapi)
+
+                seriePoster = infos['poster']
+                serieRuntime = infos['Runtime']
+                serieRating = infos['Rating']
+                serieStatus = infos['Status']
 
 
-              @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner, 
-                                  poster: seriePoster, runtime: serieRuntime, rating: serieRating, status: serieStatus
+                @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner, 
+                                    poster: seriePoster, runtime: serieRuntime, rating: serieRating, status: serieStatus,
+                                    idapi: idapi    
+              end 
+
           end
       end  
 
       def add_show_current_user(show)
         if current_user
-           current_user.shows << show
+           exist = UserShow.find_by user: current_user, show: show
+           if exist
+            flash[:danger] = 'Cette série est déjà dans votre liste.'
+           else
+            current_user.shows << show  
+            flash[:success] = 'La série a bien été ajoutée.'
+           end
         else
            redirect_to root, notice: 'Veuillez vous connecter.'
         end

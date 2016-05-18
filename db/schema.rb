@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160517144347) do
     t.string   "network"
     t.string   "rating"
     t.string   "status"
+    t.integer  "idapi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

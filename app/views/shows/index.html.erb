@@ -1,17 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<div class="col-xs-12 col-sm-5 col-md-6">
-  <h3>Dernière série modifiée</h3>
-  <div class="blog-stripe">
-      <a href="#">
-          <img src="<%= poster(@shows.last) %>" alt="" class="feature">
-      </a>
-      <div class="block-title">
-          <h2 class="text-center"><%= @shows.last.name %></h2>
-          <p class="author text-center"><small>Episode 1 - Saison 6</small></p>
-      </div>
+<% if current_user.shows.last %>
+  <div class="col-xs-12 col-sm-5 col-md-6">
+    <h3>Dernière série modifiée</h3>
+      
+    <div class="blog-stripe">
+        <a href="#">
+            <img src="<%= poster(current_user.shows.last) %>" alt="" class="feature">
+        </a>
+        <div class="block-title">
+            <h2 class="text-center"><%= current_user.shows.last.name %></h2>
+            <p class="author text-center"><small>Episode 1 - Saison 6</small></p>
+        </div>
+    </div>
   </div>
-</div>
+<% else %>
+  <h3>Pas encore de série ajoutée...</h3>
+<% end %>
 <div class="col-xs-12 col-sm-7 col-md-6 pull-right">
 <h3>Vos séries</h1>
     <% current_user.shows.each do |show| %>
