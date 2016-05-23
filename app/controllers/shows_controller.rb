@@ -89,17 +89,17 @@ class ShowsController < ApplicationController
               if exist
                 @show = exist
               else 
-                serieName = search['SeriesName']
+                serieName     = search['SeriesName']
                 serieOverview = search['Overview']
-                serieNetwork = search['Network']
-                serieBanner = search['banner']
+                serieNetwork  = search['Network']
+                serieBanner   = search['banner']
 
                 infos = apiShowService.more_infos(idapi)
 
-                seriePoster = infos['poster']
+                seriePoster  = infos['poster']
                 serieRuntime = infos['Runtime']
-                serieRating = infos['Rating']
-                serieStatus = infos['Status']
+                serieRating  = infos['Rating']
+                serieStatus  = infos['Status']
 
 
                 @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner, 

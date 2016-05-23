@@ -38,19 +38,6 @@ ActiveRecord::Schema.define(version: 20160517144347) do
 
   add_index "seasons", ["show_id"], name: "index_seasons_on_show_id"
 
-  create_table "series", force: :cascade do |t|
-    t.string   "name"
-    t.string   "overview"
-    t.string   "banner"
-    t.string   "poster"
-    t.string   "runtime"
-    t.string   "network"
-    t.string   "rating"
-    t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "shows", force: :cascade do |t|
     t.string   "name"
     t.string   "overview"
