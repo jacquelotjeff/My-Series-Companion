@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-      #@shows = Show.all
+      @shows = current_user.shows.order('name asc').all
   end
 
   # GET /shows/1
