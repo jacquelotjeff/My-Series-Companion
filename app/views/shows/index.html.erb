@@ -2,7 +2,7 @@
 
 <% if current_user.shows.last %>
 <div class="col-xs-12 col-sm-5 col-md-4">
-    <h3>Ajoutée récemment</h3>
+    <h3>Récemment ajoutée</h3>
 
     <div class="blog-stripe">
         <a href="<%= current_user.shows.last.name %>">
@@ -36,12 +36,12 @@
               <%= link_to edit_show_path(show), :class => "btn btn-sm btn-primary edit" do %>
               <span class="glyphicon glyphicon-pencil"></span>
               <% end %>
-              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain?' }, :class => "btn btn-sm btn-danger delete" do %>
+              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
               <span class="glyphicon glyphicon-trash"></span>
               <% end %>
           </div>
           <div class="rating pull-right">
-              <%= render partial: 'shows/rating', locals: { show: show } %>
+              <%= render partial: 'shows/rating', locals: { rating: show.rating } %>
           </div>
       </div>
   </div>

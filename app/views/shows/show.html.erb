@@ -24,12 +24,12 @@
   <div class="col-md-3">
 
     <% if @show.status == 'Continuing' %>
-      <h2>En production</h2>
+        <h2>En production</h2>
     <% else %>
-      <h2>Arrêtée</h2>
+        <h2>Arrêtée</h2>
     <% end %>
     <div class="rating">
-      <%= render partial: 'shows/rating', locals: { show: @show } %>
+        <%= render partial: 'shows/rating', locals: { rating: @show.rating } %>
     </div>
 
     <h3><%= @show.network %></h3>
@@ -39,36 +39,36 @@
 <div class="row">
   <% if @show.seasons.any? %>
     <% for season in @show.seasons %>
-      <h3>Saison <%= season.num %></h3>
-      <% if season.episodes.any? %>
-        <% for episode in season.episodes %>
-          <div class="col-xs-12 episode">
-            <div class="col-md-1 col-sm-2 hidden-xs">
-              <% if episode.filename %>
-                <img class="img-thumbnail img-responsive" src="<%= episode.filename %>">
-              <% end %>
+        <h3>Saison <%= season.num %></h3>
+        <% if season.episodes.any? %>
+            <% for episode in season.episodes %>
+              <div class="col-xs-12 episode">
+                <div class="col-md-1 col-sm-2 hidden-xs">
+                  <% if episode.filename %>
+                    <img class="img-thumbnail img-responsive" src="<%= episode.filename %>">
+                  <% end %>
+                </div>
+                <div class="col-xs-8 episode-desc">
+                  <h4>Episode <%= episode.number %>: <%= episode.name %></h4>
+                  <div class="episode-desc-text"><%= episode.overview %></div>
+                </div>
+                <div class="col-xs-3 col-sm-2">
+                    <!-- La classe "valided" du bouton est à entourée d'un if : <%# if episode is valided %> valided <%# end %>-->
+                    <!-- pas encore d'attribut valided sur l'episode -->
+                        <%= link_to '', viewed_path(episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
+                </div>
+                <div>
+                    Liste des utilisateurs qui ont lu l'épisode: 
+                    <% if episode.users.any? %>
+                        <%= moves.map(&:name).join(', ') %>
+                            <%= episode.users.map { |m| m.email }
+                            .join(', ')
+                            .html_safe %>
+                    <% else %>
+                        &empty;
+                    <% end %>
+                </div>
             </div>
-            <div class="col-xs-8 episode-desc">
-              <h4>Episode <%= episode.number %>: <%= episode.name %></h4>
-              <div class="episode-desc-text"><%= episode.overview %></div>
-            </div>
-            <div class="col-xs-3 col-sm-2">
-                <!-- La classe "valided" du bouton est à entourée d'un if : <%# if episode is valided %> valided <%# end %>-->
-                <!-- pas encore d'attribut valided sur l'episode -->
-                    <%= link_to '', viewed_path(episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
-            </div>
-            <div>
-              Liste des utilisateurs qui ont lu l'épisode: 
-              <% if episode.users.any? %>
-              <%# moves.map(&:name).join(', ') %>
-                <%= episode.users.map { |m| m.email }
-                  .join(', ')
-                  .html_safe %>
-                <% else %>
-                  &empty;
-                <% end %>
-            </div>
-          </div>
         <% end %>
       <% end %>
     <% end %>

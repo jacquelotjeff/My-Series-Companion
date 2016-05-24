@@ -75,50 +75,37 @@ class ShowsController < ApplicationController
       end
   end
 
-  private
+    private
       def search_show serie_name
           apiShowService = ApiShowService.new()
           
           search = apiShowService.search(params[:show][:name])
 
           if search.any?
-              
-              idapi = search['seriesid']
-              exist = Show.find_by idapi: idapi
+                idapi = search['seriesid']
+                exist = Show.find_by idapi: idapi
 
-              if exist
-                @show = exist
-              else 
-                serieName     = search['SeriesName']
-                serieOverview = search['Overview']
-                serieNetwork  = search['Network']
-                serieBanner   = search['banner']
-
-                infos = apiShowService.more_infos(idapi)
-
-                seriePoster  = infos['poster']
-                serieRuntime = infos['Runtime']
-                serieRating  = infos['Rating']
-                serieStatus  = infos['Status']
-
-
-                @show = Show.create name: serieName, overview: serieOverview, network: serieNetwork, banner: serieBanner, 
-                                    poster: seriePoster, runtime: serieRuntime, rating: serieRating, status: serieStatus,
-                                    idapi: idapi    
-              end 
-
-          end
-      end  
+                if exist
+                    @show = exist
+                else
+                    infos = apiShowService.more_infos(idapi)
+                    show = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
+                        banner: search['banner'], poster: infos['poster'], runtime: infos['Runtime'],
+                        rating: infos['Rating'], status: infos['Status'], idapi: idapi }
+                    @show = Show.create show   
+                end
+            end
+        end  
 
       def add_show_current_user(show)
         if current_user
-           exist = UserShow.find_by user: current_user, show: show
-           if exist
-            flash[:danger] = 'Cette série est déjà dans votre liste.'
-           else
-            current_user.shows << show  
-            flash[:success] = 'La série a bien été ajoutée.'
-           end
+            exist = UserShow.find_by user: current_user, show: show
+            if exist
+                flash[:danger] = 'Cette série est déjà dans votre liste.'
+            else
+                current_user.shows << show  
+                flash[:success] = 'La série a bien été ajoutée.'
+            end
         else
            redirect_to root, notice: 'Veuillez vous connecter.'
         end

@@ -34,51 +34,27 @@
 	border-bottom:1px solid #aaa;
 	margin-bottom:15px;
 	padding-bottom:15px;
+
+	p {
+		margin: 0px;
+	}
 }
 
 .side-shows{
 	position:relative;
-}
-.side-shows .rating{
-	margin-top:44px;
-}
-.shows-actions {
-	margin-top:-15px;
-	position:absolute;
-	right:15px;
+	
+	.rating{
+		margin-top:44px;
+	}
 }
 
-.shows-actions .show, .shows-actions .edit, .shows-actions .delete{
-	visibility:hidden;
-	transition:0.1s;
-	opacity:0;
-}
-
-.shows-item:hover .shows-actions{
+.shows-item:hover .shows-actions {
+	margin-top: 0px;
 	transition:0.1s;
 	visibility:visible;
 	opacity:1;
-}
 
-.shows-item:hover .shows-actions .show{
-	margin-top:25px;
-	transition:0.1s;
-	visibility:visible;
-	opacity:1;
-}
-
-.shows-item:hover .shows-actions .edit{
-	margin-top:25px;
-	transition:0.1s;
-	transition-delay:0.05s;
-	visibility:visible;
-	opacity:1;
-}
-
-.shows-item:hover .shows-actions .delete{
-	margin-top:25px;
-	transition:0.1s;
-	transition-delay:0.1s;
-	visibility:visible;
-	opacity:1;
+	a {
+		transition: 1s;
+	}
 }
