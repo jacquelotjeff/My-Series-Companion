@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-      @shows = current_user.shows.order('name asc').all
+    @shows = current_user.shows.order('name asc').all
   end
 
   # GET /shows/1
@@ -27,38 +27,38 @@ class ShowsController < ApplicationController
   # POST /shows
   # POST /shows.json
   def create
-      search_show params[:show][:name]
+    search_show params[:show][:name]
 
-      respond_to do |format|
-        if @show.nil?
-            flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
-            redirect_to shows_path
-            return []
-        end
-
-        if @show.save
-            add_show_current_user(@show)
-            format.html { redirect_to @show }
-            format.json { render :show, status: :created, location: @show }
-        else
-            format.html { render :new }
-            format.json { render json: @show.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @show.nil?
+        flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
+        redirect_to shows_path
+        return []
       end
+
+      if @show.save
+        add_show_current_user(@show)
+        format.html { redirect_to @show }
+        format.json { render :show, status: :created, location: @show }
+      else
+        format.html { render :new }
+        format.json { render json: @show.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /shows/1
   # PATCH/PUT /shows/1.json
   def update
       respond_to do |format|
-          if @show.update(show_params)
-            flash[:success] = 'La série a bien été éditée.'
-            format.html { redirect_to @show }
-            format.json { render :show, status: :ok, location: @show }
-          else
-            format.html { render :edit }
-            format.json { render json: @show.errors, status: :unprocessable_entity }
-          end
+        if @show.update(show_params)
+          flash[:success] = 'La série a bien été éditée.'
+          format.html { redirect_to @show }
+          format.json { render :show, status: :ok, location: @show }
+        else
+          format.html { render :edit }
+          format.json { render json: @show.errors, status: :unprocessable_entity }
+        end
       end
   end
 
@@ -75,49 +75,57 @@ class ShowsController < ApplicationController
       end
   end
 
-    private
-      def search_show serie_name
-          apiShowService = ApiShowService.new()
-          
-          search = apiShowService.search(params[:show][:name])
+  private
 
-          if search.any?
-                idapi = search['seriesid']
-                exist = Show.find_by idapi: idapi
+  def search_show serie_name
+    # TODO STATIC METHOD
+    apiShowService = ApiShowService.new()
+    search = apiShowService.search(params[:show][:name])
 
-                if exist
-                    @show = exist
-                else
-                    infos = apiShowService.more_infos(idapi)
-                    show = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
-                        banner: search['banner'], poster: infos['poster'], runtime: infos['Runtime'],
-                        rating: infos['Rating'], status: infos['Status'], idapi: idapi }
-                    @show = Show.create show   
-                end
-            end
-        end  
+    if search.any?
+      exist = Show.find_by idapi: search['seriesid']
 
-      def add_show_current_user(show)
-        if current_user
-            exist = UserShow.find_by user: current_user, show: show
-            if exist
-                flash[:danger] = 'Cette série est déjà dans votre liste.'
-            else
-                current_user.shows << show  
-                flash[:success] = 'La série a bien été ajoutée.'
-            end
-        else
-           redirect_to root, notice: 'Veuillez vous connecter.'
-        end
+      if exist
+        @show = exist
+      else
+        #infos = apiShowService.more_infos(idapi)
+        show = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
+          banner: search['banner'], poster: search['poster'], runtime: search['Runtime'],
+          rating: search['Rating'], status: search['Status'], idapi: search['seriesid'] }
+
+        @show = create_show show
       end
 
-      # Use callbacks to share common setup or constraints between actions.
-      def set_show
-        @show = Show.find(params[:id])
-      end
+      # Update seasons for the show
+      update_seasons search['seriesid']
+    end
+  end  
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def show_params
-        params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
-      end
+  def update_seasons idapi
+    # TODO STATIC METHOD
+    #apiShowService = ApiShowService.new()
+    #episodes = apiShowService.get_all_episodes(idapi)
+  end
+
+  def create_show show
+    @show = Show.create show
+  end
+
+  def add_show_current_user show
+    exist = UserShow.find_by user: current_user, show: show
+    if exist
+      flash[:danger] = 'Cette série est déjà dans votre liste.'
+    else
+      current_user.shows << show  
+      flash[:success] = 'La série a bien été ajoutée.'
+    end
+  end
+
+  def set_show
+    @show = Show.find(params[:id])
+  end
+
+  def show_params
+    params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
+  end
 end
