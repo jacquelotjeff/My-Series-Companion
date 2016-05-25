@@ -1,7 +1,7 @@
 # app/services/api_show_service.rb
 class ApiShowService
-	include HTTParty
-	base_uri 'http://www.thetvdb.com/api'
+  include HTTParty
+  base_uri 'http://www.thetvdb.com/api'
   # def initialize(api_key, language = 'fr')
   #   	@api_key = api_key
   #   	@language = language
@@ -22,36 +22,25 @@ class ApiShowService
     end
   end
 
-  # TODO REFACTOR AND REMOVE
-  # def more_infos(series_dbtv_id)
-  #   response = self.class.get("/" + @api_key + "/series/" + series_dbtv_id + '/fr.xml')
+  # Get all episodes for one serie by id
+  def get_all_episodes(id_serie)
+    response = self.class.get("/" + @api_key + "/series/" + id_serie + '/all/fr.xml')
 
-  #   if response['Data'].blank? || response['Data']['Series'].blank?
-  #       return []
-  #   else
-  #     return response["Data"]['Series']
-  #   end
-  # end
+    if response['Data'].blank? || response['Data']['Episode'].blank?
+        return []
+    else
+      return response["Data"]['Episode']
+    end
+  end
 
   # Get All informations for one serie by id
-  def get_all_infos(series_dbtv_id)
-    response = self.class.get("/" + @api_key + "/series/" + series_dbtv_id + '/all/fr.xml')
+  def get_all_infos(id_serie)
+    response = self.class.get("/" + @api_key + "/series/" + id_serie + '/all/fr.xml')
     
     if response['Data'].blank? || response['Data']['Series'].blank?
         return []
     else
       return response["Data"]['Series']
-    end
-  end
-
-  # Get all episodes for one serie by id
-  def get_all_episodes(series_dbtv_id)
-    response = self.class.get("/" + @api_key + "/series/" + series_dbtv_id + '/all/fr.xml')
-    
-    if response['Data'].blank? || response['Data']['Episode'].blank?
-        return []
-    else
-      return response["Data"]['Episode']
     end
   end
 end

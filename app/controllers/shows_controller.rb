@@ -80,8 +80,8 @@ class ShowsController < ApplicationController
 
   def search_show serie_name
     # TODO STATIC METHOD
-    apiShowService = ApiShowService.new()
-    search = apiShowService.search(params[:show][:name])
+    api_show_service = ApiShowService.new()
+    search = api_show_service.search(params[:show][:name])
 
     if search.any?
       exist = Show.find_by idapi: search['seriesid']
@@ -97,15 +97,14 @@ class ShowsController < ApplicationController
         @show = create_show show
       end
 
-      # Update seasons for the show
-      update_seasons search['seriesid']
+      # Update episodes
+      update_episodes (@show)
     end
-  end  
+  end
 
-  def update_seasons idapi
-    # TODO STATIC METHOD
-    #apiShowService = ApiShowService.new()
-    #episodes = apiShowService.get_all_episodes(idapi)
+  def update_episodes show
+   api_show_service = ApiShowService.new()
+   episodes = api_show_service.get_all_episodes(@show.idapi.to_s)
   end
 
   def create_show show
