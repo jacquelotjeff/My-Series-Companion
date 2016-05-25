@@ -1,12 +1,32 @@
-<h1>Nouvelle série</h1>
-
-<%= simple_form_for(@show) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :name, label: 'Nom de la série' %>
-  <div class="form-actions">
-    <%= f.button :submit, 'Rechercher et ajouter la série' %>
-  </div>
-<% end %>
-
-<%= link_to 'Retour', shows_path %>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Ajoutez une série à votre collection</h1>
+	</div>
+	<div class="col-md-12">
+		<h3>À l'affiche</h3>
+		<div class="slide_shows">
+			<% @shows.first(8).each do |show_trending| %>
+				<div class="col-md-1 trending_show">
+					<div class="black_bg">
+						<img class="img-responsive" src="<%= poster(show_trending) %>">
+						<p class="btn_add_show">Ajouter</p>
+					</div>
+					<p class="show_title"><%= show_trending.name %></p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<%= simple_form_for(@show) do |f| %>
+		    <%= f.error_notification %>
+		    <h3>Recherchez votre série</h3>
+			<div class="form-inputs">
+			    <%= f.input :name, label: false %>
+					<div class="form-actions">
+					<%= f.button :submit, 'Rechercher et ajouter la série', class: 'btn btn-success' %>
+					<%= link_to 'Retour', shows_path, class: 'btn btn-default' %>
+					</div>
+			</div>
+		<% end %>
+	</div>
+</div>

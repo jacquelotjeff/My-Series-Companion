@@ -1,0 +1,44 @@
+.trending_show{
+	padding: 1px;
+	transition:0.1s;
+	cursor: pointer;
+	margin-bottom: 10px;
+	width:12.5%;
+
+	.show_title{
+		text-align: center;
+	}
+
+	.black_bg{
+		background-color:#000;
+		position: relative;
+
+		.btn_add_show{
+			padding:10px;
+			font-size:10px;
+			text-transform: uppercase;
+			background-color:#000;
+			color:#fff;
+			border:1px solid #fff;
+			position: absolute;
+			top:43%;
+			left:25%;
+			opacity: 0;
+			transition: 0.3s;
+		}
+	}
+}
+
+.trending_show:hover{
+	img{
+		opacity: 0.5;
+		transition:0.1s;
+	}
+
+	.black_bg{
+		.btn_add_show{
+			opacity: 1;
+			transition: 0.3s
+		}
+	}
+}

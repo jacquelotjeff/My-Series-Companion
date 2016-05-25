@@ -5,7 +5,7 @@
     <h3>Récemment ajoutée</h3>
 
     <div class="blog-stripe">
-        <a href="<%= current_user.shows.last.name %>">
+        <a href="<%= show_path(current_user.shows.last) %>">
             <img src="<%= poster(current_user.shows.last) %>" alt="" class="feature img-responsive">
             <div class="block-title">
                 <h2 class="text-center"><%= current_user.shows.last.name %></h2>
