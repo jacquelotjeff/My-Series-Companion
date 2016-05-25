@@ -17,6 +17,7 @@ class ShowsController < ApplicationController
 
   # GET /shows/new
   def new
+    @shows = Show.order('name asc').all
     @show = Show.new
   end
 
