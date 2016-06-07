@@ -29,6 +29,8 @@ gem 'will_paginate-bootstrap'
 gem 'multi_xml', '~> 0.5.0'
 gem 'httparty', '~> 0.13.0'
 
+# Slug for url 
+gem 'friendly_id'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
