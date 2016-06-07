@@ -1,5 +1,6 @@
 class Show < ActiveRecord::Base
 	extend FriendlyId
+	include SearchCop
 
 	has_many :seasons
 	has_many :user_shows
@@ -14,5 +15,10 @@ class Show < ActiveRecord::Base
 	# Surcharge de FriendlyId pour forcer la mise à jour du nom
 	def should_generate_new_friendly_id?
 		name_changed? || super
+	end
+
+	# Search scope
+	search_scope :search do
+		attributes :name, :network, :overview
 	end
 end

@@ -8,6 +8,10 @@ class ShowsController < ApplicationController
   # GET /shows.json
   def index
     @shows = current_user.shows.order('name asc').all
+    if params[:shows]
+      @search_value = search_params[:search]
+      @shows = @shows.search(@search_value)
+    end
   end
 
   # GET /shows/1
@@ -127,5 +131,9 @@ class ShowsController < ApplicationController
 
   def show_params
     params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
+  end
+
+  def search_params
+    params.require(:shows).permit(:search)
   end
 end

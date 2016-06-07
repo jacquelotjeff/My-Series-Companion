@@ -18,31 +18,55 @@
 <h3>Pas encore de série ajoutée...</h3>
 <% end %>
 <div class="col-xs-12 col-sm-7 col-md-8">
-    <h3>Vos séries</h1>
-        <% @shows.each do |show| %>
-        <div class="row shows-item">
-          <div class="col-xs-3">
-            <img class="img-thumbnail img-responsive" src="<%= banner(show) %>">
-        </div>
-        <div class="col-xs-5">
-            <p><%= show.name %></p>
-            <p class="author">Episode 6 - Saison 4</p>
-        </div>
-        <div class="col-xs-4 side-shows">
-            <div class="btn-group pull-right shows-actions" role="group">
-              <%= link_to show, :class => "btn btn-sm btn-success show" do %>
-              <span class="glyphicon glyphicon-eye-open"></span>
-              <% end %>
-              <%= link_to edit_show_path(show), :class => "btn btn-sm btn-primary edit" do %>
-              <span class="glyphicon glyphicon-pencil"></span>
-              <% end %>
-              <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
-              <span class="glyphicon glyphicon-trash"></span>
-              <% end %>
+  <div class="row head-list-shows">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <h3>Vos séries</h1>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8">
+      <%= simple_form_for :shows, url: shows_path,
+                                method: :get,
+                                html: { class: 'form-inline text-right', id: 'search-show' } do |f| %>
+        <div class="form-group">
+          <div class="input-group">
+            <%= f.input_field :search, label: false,
+                                        placeholder: 'Rechercher',
+                                        class: 'form-control',
+                                        value: @search_value %>
+              <span class="input-group-btn">
+                <%= button_tag type: :submit, class: 'btn btn-default' do %>
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <% end %>
+              </span>
           </div>
-          <div class="rating pull-right">
-              <%= render partial: 'shows/rating', locals: { rating: show.rating } %>
-          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% @shows.each do |show| %>
+  <div class="row shows-item">
+    <div class="col-xs-3">
+      <img class="img-thumbnail img-responsive" src="<%= banner(show) %>">
+  </div>
+  <div class="col-xs-5">
+      <p><%= show.name %></p>
+      <p class="author">Episode 6 - Saison 4</p>
+  </div>
+  <div class="col-xs-4 side-shows">
+      <div class="btn-group pull-right shows-actions" role="group">
+        <%= link_to show, :class => "btn btn-sm btn-success show" do %>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+        <%= link_to edit_show_path(show), :class => "btn btn-sm btn-primary edit" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+    </div>
+    <div class="rating pull-right">
+        <%= render partial: 'shows/rating', locals: { rating: show.rating } %>
+    </div>
       </div>
   </div>
 
