@@ -2,10 +2,6 @@
 class ApiShowService
   include HTTParty
   base_uri 'http://www.thetvdb.com/api'
-  # def initialize(api_key, language = 'fr')
-  #   	@api_key = api_key
-  #   	@language = language
-  # end
 
   def initialize()
     @api_key = Rails.application.secrets.api_access_key
@@ -14,6 +10,10 @@ class ApiShowService
   def search(serie_name)
     options = { query: {seriesname: serie_name, language: 'fr'} }
     response = self.class.get("/GetSeries.php", options)
+    
+    puts '///////////////////'
+    puts response.inspect
+    puts '///////////////////'
     
     if response['Data'].blank? || response['Data']['Series'].blank?
         return []
@@ -24,7 +24,7 @@ class ApiShowService
 
   # Get all episodes for one serie by id
   def get_all_episodes(id_serie)
-    response = self.class.get("/" + @api_key + "/series/" + id_serie + '/all/fr.xml')
+    response = self.class.get("/#{@api_key}/series/#{id_serie}/all/fr.xml")
 
     if response['Data'].blank? || response['Data']['Episode'].blank?
         return []
@@ -35,7 +35,7 @@ class ApiShowService
 
   # Get All informations for one serie by id
   def get_all_infos(id_serie)
-    response = self.class.get("/" + @api_key + "/series/" + id_serie + '/all/fr.xml')
+    response = self.class.get("/#{@api_key}/series/#{id_serie}/all/fr.xml")
     
     if response['Data'].blank? || response['Data']['Series'].blank?
         return []

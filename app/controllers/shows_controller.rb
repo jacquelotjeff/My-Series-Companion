@@ -32,7 +32,9 @@ class ShowsController < ApplicationController
   # POST /shows
   # POST /shows.json
   def create
-    search_show params[:show][:name]
+    @show = search_show params[:show][:name]
+
+    puts @show.inspect
 
     respond_to do |format|
       if @show.nil?
@@ -42,7 +44,7 @@ class ShowsController < ApplicationController
       end
 
       if @show.save
-        add_show_current_user(@show)
+        add_show_to_current_user @show
         format.html { redirect_to @show }
         format.json { render :show, status: :created, location: @show }
       else
@@ -82,46 +84,47 @@ class ShowsController < ApplicationController
 
   private
 
-  def search_show serie_name
+  def search_show(serie_name)
     # TODO STATIC METHOD
     api_show_service = ApiShowService.new()
     search = api_show_service.search(params[:show][:name])
 
     if search.any?
-      exist = Show.find_by idapi: search['seriesid']
+      exist = Show.find_by idapi: search['id']
+      puts exist.inspect
 
       if exist
-        @show = exist
+        show = exist
       else
-        #infos = apiShowService.more_infos(idapi)
-        show = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
+        show_informations = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
           banner: search['banner'], poster: search['poster'], runtime: search['Runtime'],
           rating: search['Rating'], status: search['Status'], idapi: search['seriesid'] }
 
-        @show = create_show show
+        show = create_show show
       end
 
       # Update episodes
-      update_episodes (@show)
+      #update_episodes(show)
     end
   end
 
-  def update_episodes show
-   api_show_service = ApiShowService.new()
-   episodes = api_show_service.get_all_episodes(@show.idapi.to_s)
+  def update_episodes(show)
+    #api_show_service = ApiShowService.new()
+    #episodes = api_show_service.get_all_episodes(show.idapi.to_s)
   end
 
-  def create_show show
+  def create_show(show)
     @show = Show.create show
   end
 
-  def add_show_current_user show
+  # Check if current user has already the show, if not add show in user shows
+  def add_show_to_current_user(show)
     exist = UserShow.find_by user: current_user, show: show
     if exist
       flash[:danger] = 'Cette série est déjà dans votre liste.'
     else
       current_user.shows << show  
-      flash[:success] = 'La série a bien été ajoutée.'
+      flash[:success] = 'La série a bien été ajoutée à votre liste.'
     end
   end
 
