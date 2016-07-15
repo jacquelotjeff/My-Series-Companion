@@ -5,4 +5,8 @@ module ShowsHelper
   def poster(show)
     "http://thetvdb.com/banners/#{show.poster}"
   end
+
+  def banner(url)
+  	"http://thetvdb.com/banners/#{url}"
+  end
 end

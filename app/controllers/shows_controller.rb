@@ -1,7 +1,7 @@
 class ShowsController < ApplicationController
   require 'api_show_service'
 
-  before_action :set_show, only: [:show, :edit, :update, :destroy]
+  before_action :set_show, only: [:show, :edit, :synch, :update, :destroy]
   before_action :authenticate_user!
 
   # GET /shows
@@ -34,7 +34,7 @@ class ShowsController < ApplicationController
   def create
     @show = search_show params[:show][:name]
 
-    puts @show.inspect
+    #puts @show.inspect
 
     respond_to do |format|
       if @show.nil?
@@ -69,11 +69,27 @@ class ShowsController < ApplicationController
       end
   end
 
+  def synch
+    api_show_service = ApiShowService.new()
+    episodes = api_show_service.get_all_episodes(@show.idapi)
+
+    puts '///////////////////'
+    puts 'controller'
+    puts episodes.inspect
+    puts '///////////////////'
+
+    update_episodes_for_show(@show, episodes)
+
+    flash[:success] = 'Votre série a bien été mise à jour.'
+
+    redirect_to @show
+  end
+
   # DELETE /shows/1
   # DELETE /shows/1.json
   def destroy
-    @userShow = UserShow.find_by user: current_user, show: @show
-    @userShow.destroy
+    userShow = UserShow.find_by user: current_user, show: @show
+    userShow.destroy
     
       respond_to do |format|
         flash[:success] = 'La série a bien été supprimée.'
@@ -85,32 +101,64 @@ class ShowsController < ApplicationController
   private
 
   def search_show(serie_name)
-    # TODO STATIC METHOD
     api_show_service = ApiShowService.new()
     search = api_show_service.search(params[:show][:name])
 
     if search.any?
-      exist = Show.find_by idapi: search['id']
-      puts exist.inspect
+      exist = Show.find_by idapi: search['Series']['id']
 
       if exist
         show = exist
       else
-        show_informations = { name: search['SeriesName'], overview: search['Overview'], network: search['Network'],
-          banner: search['banner'], poster: search['poster'], runtime: search['Runtime'],
-          rating: search['Rating'], status: search['Status'], idapi: search['seriesid'] }
+        serie_infos = search['Series']
+        show_informations = {
+          name: serie_infos['SeriesName'],
+          overview: serie_infos['Overview'],
+          network: serie_infos['Network'],
+          banner: serie_infos['banner'],
+          poster: serie_infos['poster'],
+          runtime: serie_infos['Runtime'],
+          rating: serie_infos['Rating'],
+          status: serie_infos['Status'],
+          idapi: serie_infos['seriesid']
+        }
 
-        show = create_show show
+        show = create_show show_informations
+        update_episodes_for_show(show, search['Episode'])
+
+        return show
       end
-
-      # Update episodes
-      #update_episodes(show)
     end
   end
 
-  def update_episodes(show)
-    #api_show_service = ApiShowService.new()
-    #episodes = api_show_service.get_all_episodes(show.idapi.to_s)
+  def update_episodes_for_show(show, episodes)
+    episodes.each do |episode|
+
+      season_infos = { num: episode['SeasonNumber'], show: show }
+      # Check if the season exist ...
+      season = Season.find_by(season_infos)
+
+      if season.nil?
+        season = Season.create(season_infos)
+      end
+
+      episode_infos = {
+        name: episode['EpisodeName'],
+        number: episode['EpisodeNumber'],
+        firstaired: episode['FirstAired'],
+        overview: episode['Overview'],
+        rating: episode['Rating'],
+        ratingcount: episode['RatingCount'],
+        filename: episode['filename'],
+        season: season
+      }
+
+      episode = Episode.find_by(episode_infos)
+
+      if episode.nil? && !episode_infos[:name].nil?
+        episode = Episode.create(episode_infos)
+      end
+    end
   end
 
   def create_show(show)

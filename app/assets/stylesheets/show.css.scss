@@ -1,21 +1,28 @@
-.lecteur:hover{
+.lecteur:hover {
 	cursor:pointer;
 }
 
-.serie-desc{
+.serie-desc {
 	text-transform:uppercase;
 	color:#aaa;
 }
 
-.episode{
+.episodes-list {
+	margin-top: 30px;
+}
+
+.episode {
 	border-bottom:1px solid #ccc;
 	transition:0.3s;
+	min-height: 140px;
+	display: table;
+	padding: 7px;
 }
-.episode:hover{
+.episode:hover {
 	background-color:#ddd;
 }
-.episode img{
-	margin-left:-13px;
+.episode img {
+	margin-top: 10px;
 }
 .rating{
 	margin-top:30px;
@@ -25,9 +32,9 @@
 	padding-left:20px;
 }
 
-.episode-desc-text{
-	overflow: hidden;
-	height:61px;
+.episode-desc-text {
+	text-align: justify;
+	margin-bottom: 10px;
 }
 
 .valid-episode{
@@ -36,7 +43,4 @@
 
 .valided{
 	color: #00ff00;
-}
-.episode img{
-	margin-top:20%;
 }
