@@ -1,14 +1,15 @@
-<div class="col-sm-3 hidden-xs">
+<div class="col-sm-4 hidden-xs">
   <div class="lecteur">
     <img class="img-thumbnail img-responsive" src="<%= banner(@show.poster, 'small_poster') %>">
   </div>
 </div>
-<div class="col-xs-9 col-sm-offset-0 col-xs-offset-2">
+<div class="col-xs-8 col-sm-offset-0 col-xs-offset-2">
   <h2><%= @show.name %> <%# link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
     <span class="pull-right">
       <%= link_to synch_path(@show), :class => "btn btn-primary" do %>
             <span class="glyphicon glyphicon-refresh"></span> Synchroniser
             <% end %>
+      <%= link_to 'Retour à la liste', shows_path, class: 'btn btn-default' %>
     </span>
   </h2>
   <% if @show.status == 'Continuing' %>
@@ -32,13 +33,15 @@
   </p>
 </div>
 <div class="col-md-12 episodes-list">
-  <h3>Naviguer</h3>
   <div class="row">
+    <h3>Naviguer</h3>
     <div class="col-xs-2"> <!-- required for floating -->
         <!-- Nav tabs -->
         <ul class="nav nav-tabs tabs-left">
-          <% for season in @show.seasons %>
-            <li role="presentation"><a href="#season<%= season.num %>" data-toggle="tab">Saison <%= season.num %></a></li>
+          <% @show.seasons.each_with_index do |season, index| %>
+            <li role="presentation" class="<%= index == 0 ? 'active' : '' %>">
+              <a href="#season<%= season.num %>" data-toggle="tab">Saison <%= season.num %></a>
+            </li>
           <% end %>
         </ul>
     </div>
@@ -53,7 +56,9 @@
                     <% for episode in season.episodes %>
                       <div class="episode">
                         <div class="col-md-2 hidden-xs">
+                          <% if episode.filename %>
                             <img class="img-thumbnail img-responsive" src="<%= banner(episode.filename, 'banner_episode') %>">
+                          <% end %>
                         </div>
                         <div class="col-md-8 episode-desc">
                           <h4>Épisode <%= episode.number %> : <%= episode.name %></h4>
@@ -61,23 +66,11 @@
                         </div>
                         <div class="col-md-2">
                             <% if current_user.episodes.find_by_id(episode.id).present? %>
-                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-eye-open btn btn-default pull-right valid-episode valided" %>
+                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided", :data => { :toggle =>"tooltip", :placement => "top", :title => "Tooltip on top" }, :title => 'Tooltip' %>
                             <% else %>
-                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-eye-open btn btn-default pull-right valid-episode" %>
+                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode", :data => { :toggle =>"tooltip", :placement => "top", :title => "Tooltip on top" }, :title => 'Tooltip' %>
                             <% end %>
                         </div>
-                      <!--   <div>
-                            Liste des utilisateurs qui ont lu l'épisode: --> 
-          <%#                    <% if episode.users.any? %>
-          <%#                         <%= moves.map(&:name).join(', ') %>
-          <%#                             <%= episode.users.map { |m| m.email }
-          <%#                             .join(', ')
-          <%#                             .html_safe %>
-          <%#                     <% else %>
-          <%#                         &empty;
-          <%#                     <% end %>
-          <%#                     %>
-                        <!-- </div> -->
                     </div>
                 <% end %>
               <% end %>
