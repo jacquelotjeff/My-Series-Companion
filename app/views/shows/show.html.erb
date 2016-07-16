@@ -4,7 +4,10 @@
   </div>
 </div>
 <div class="col-xs-8 col-sm-offset-0 col-xs-offset-2">
-  <h2><%= @show.name %> <%= link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
+  <h2><%# @show.name %> <%# link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
+  <%= link_to synch_path(@show), :class => "btn btn-primary" do %>
+        <span class="glyphicon glyphicon-refresh"></span> Synchroniser
+        <% end %>
   <%= link_to 'Retour', shows_path, class: 'btn btn-default' %></h2>
 
   <% if @show.status == 'Continuing' %>
@@ -30,58 +33,65 @@
 </div>
 <div class="col-md-12 episodes-list">
   <div class="row">
-    <div class="col-md-2 c-both">
     <h3>Naviguer</h3>
-      <ul class="nav nav-pills nav-stacked">
-        <% for season in @show.seasons %>
-          <li role="presentation"><a href="#">Saison <%= season.num %></a></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="col-md-10">
-    <% if @show.seasons.any? %>
-      <% for season in @show.seasons %>
-          <h3>Saison <%= season.num %></h3>
-          <% if season.episodes.any? %>
-              <% for episode in season.episodes %>
-                <div class="episode">
-                  <div class="col-md-2 hidden-xs">
-                    <% if episode.filename %>
-                      <img class="img-thumbnail img-responsive" src="<%= banner(episode.filename) %>">
-                    <% end %>
-                  </div>
-                  <div class="col-md-8 episode-desc">
-                    <h4>Épisode <%= episode.number %> : <%= episode.name %></h4>
-                    <div class="episode-desc-text"><%= episode.overview %></div>
-                  </div>
-                  <div class="col-md-2">
-                      <% if current_user.episodes.find_by_id(episode.id).present? %>
-                        <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
-                      <% else %>
-                        <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode" %>
-                      <% end %>
-                  </div>
-                <!--   <div>
-                      Liste des utilisateurs qui ont lu l'épisode: --> 
-    <%#                    <% if episode.users.any? %>
-    <%#                         <%= moves.map(&:name).join(', ') %>
-    <%#                             <%= episode.users.map { |m| m.email }
-    <%#                             .join(', ')
-    <%#                             .html_safe %>
-    <%#                     <% else %>
-    <%#                         &empty;
-    <%#                     <% end %>
-    <%#                     %>
-                  <!-- </div> -->
-              </div>
+    <div class="col-xs-2"> <!-- required for floating -->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tabs-left">
+          <% for season in @show.seasons %>
+            <li role="presentation"><a href="#season<%= season.num %>" data-toggle="tab">Saison <%= season.num %></a></li>
           <% end %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <div class="col-md-12">
-        <p>Pas de saisons pour cette série.</p>
-      </div>
-    <% end %>
+        </ul>
+    </div>
+
+    <div class="col-xs-10">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <% if @show.seasons.any? %>
+            <% for season in @show.seasons %>
+              <div class="tab-pane fade <% if season.num == 1 %>active in<% end %>" id="season<%= season.num %>">
+                <h3>Saison <%= season.num %></h3>
+                <% if season.episodes.any? %>
+                    <% for episode in season.episodes %>
+                      <div class="episode">
+                        <div class="col-md-2 hidden-xs">
+                          <% if episode.filename %>
+                            <img class="img-thumbnail img-responsive" src="<%= banner(episode.filename) %>">
+                          <% end %>
+                        </div>
+                        <div class="col-md-8 episode-desc">
+                          <h4>Épisode <%= episode.number %> : <%= episode.name %></h4>
+                          <div class="episode-desc-text"><%= episode.overview %></div>
+                        </div>
+                        <div class="col-md-2">
+                            <% if current_user.episodes.find_by_id(episode.id).present? %>
+                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode valided" %>
+                            <% else %>
+                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-ok btn btn-default pull-right valid-episode" %>
+                            <% end %>
+                        </div>
+                      <!--   <div>
+                            Liste des utilisateurs qui ont lu l'épisode: --> 
+          <%#                    <% if episode.users.any? %>
+          <%#                         <%= moves.map(&:name).join(', ') %>
+          <%#                             <%= episode.users.map { |m| m.email }
+          <%#                             .join(', ')
+          <%#                             .html_safe %>
+          <%#                     <% else %>
+          <%#                         &empty;
+          <%#                     <% end %>
+          <%#                     %>
+                        <!-- </div> -->
+                    </div>
+                <% end %>
+              <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="col-md-12">
+              <p>Pas de saisons pour cette série.</p>
+            </div>
+          <% end %>
+        </div>
     </div>
   </div>
 </div>

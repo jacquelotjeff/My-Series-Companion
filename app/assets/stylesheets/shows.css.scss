@@ -32,30 +32,34 @@
 
 .shows-item{
 	border-bottom:1px solid #aaa;
-	margin-bottom:15px;
+	padding-top:15px;
 	padding-bottom:15px;
 
 	p {
 		margin: 0px;
 	}
 }
-
-.side-shows{
-	position:relative;
-	
-	.rating{
-		margin-top:44px;
+.rating{
+	span{
+		color:#FFD700;
 	}
 }
+.side-shows{
+	position:relative;
+}
 
-.shows-item:hover .shows-actions {
-	margin-top: 0px;
+.shows-item:hover {
+	background-color:#ddd;
 	transition:0.1s;
-	visibility:visible;
-	opacity:1;
+	.shows-actions {
+		margin-top: 0px;
+		transition:0.1s;
+		visibility:visible;
+		opacity:1;
 
-	a {
-		transition: 1s;
+		a {
+			transition: 1s;
+		}
 	}
 }
 
