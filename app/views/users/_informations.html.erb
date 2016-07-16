@@ -1,0 +1,16 @@
+  <div class="jumbotron">
+      <div class="container">
+          <%= image_tag("logo.png", alt: 'My Series Companion', class: 'col-md-2') %>
+          <div class="col-md-10">
+              <h2 class="nomargin">My Series Companion</h2>
+              <p>Mon petit Compagnon est une petite application vous permettant de suivre la progression de vos séries : épisodes et saisons.</p>
+              <p>
+              <% if type == 'registration' %>
+                  <%= link_to 'Inscrivez-vous, c\'est gratuit', new_user_registration_path, class: 'btn btn-primary btn-md' %>
+              <% else %>
+                  <%= link_to 'Déjà inscrit? Connectez-vous', new_user_session_path, class: 'btn btn-primary btn-md' %>
+              <% end %>
+              </p>
+          </div>
+      </div>
+  </div>

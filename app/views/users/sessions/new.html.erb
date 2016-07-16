@@ -1,15 +1,17 @@
-<!-- Sign in and sign up page-->
-<div class="module form-module">
+<div class="col-md-6">
   <div class="form">
     <h2>Connectez-vous</h2>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <%= f.input :password, required: false %>
+      <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       <%= f.button :submit, "Connexion" %>
     <% end %>
   </div>
   <div class="cta"><a href="#"><%= render "users/shared/links" %></a></div>
+</div>
+<div class="col-md-6">
+  <%= render partial: 'users/informations', locals: { type: 'registration' } %>
 </div>
 
 
