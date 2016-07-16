@@ -4,16 +4,18 @@
   </div>
 </div>
 <div class="col-xs-8 col-sm-offset-0 col-xs-offset-2">
-  <h2><%# @show.name %> <%# link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
-  <%= link_to synch_path(@show), :class => "btn btn-primary" do %>
-        <span class="glyphicon glyphicon-refresh"></span> Synchroniser
-        <% end %>
-  <%= link_to 'Retour', shows_path, class: 'btn btn-default' %></h2>
-
+  <h2><%= @show.name %> <%# link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
+    <span class="pull-right">
+      <%= link_to synch_path(@show), :class => "btn btn-primary" do %>
+            <span class="glyphicon glyphicon-refresh"></span> Synchroniser
+            <% end %>
+      <%= link_to 'Retour à la liste', shows_path, class: 'btn btn-default' %>
+    </span>
+  </h2>
   <% if @show.status == 'Continuing' %>
     <h4>En production</h4>
   <% else %>
-      <h2>Arrêtée</h2>
+      <h4>Arrêtée</h4>
   <% end %>
   <div class="rating">
       <%= render partial: 'shows/rating', locals: { rating: @show.rating } %>
