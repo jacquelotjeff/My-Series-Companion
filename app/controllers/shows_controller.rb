@@ -1,13 +1,17 @@
 class ShowsController < ApplicationController
   require 'api_show_service'
 
-  before_action :set_show, only: [:show, :edit, :synch, :update, :destroy]
+  before_action :set_show, only: [:show, :synch, :destroy]
   before_action :authenticate_user!
 
   # GET /shows
   # GET /shows.json
   def index
     @shows = current_user.shows.order('name asc').all
+
+    if @shows.empty?
+      redirect_to new_show_path
+    end 
     if params[:shows]
       @search_value = search_params[:search]
       @shows = @shows.search(@search_value)
@@ -23,10 +27,6 @@ class ShowsController < ApplicationController
   def new
     @shows = Show.order('name asc').all
     @show = Show.new
-  end
-
-  # GET /shows/1/edit
-  def edit
   end
 
   # POST /shows
@@ -52,21 +52,6 @@ class ShowsController < ApplicationController
         format.json { render json: @show.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # PATCH/PUT /shows/1
-  # PATCH/PUT /shows/1.json
-  def update
-      respond_to do |format|
-        if @show.update(show_params)
-          flash[:success] = 'La série a bien été éditée.'
-          format.html { redirect_to @show }
-          format.json { render :show, status: :ok, location: @show }
-        else
-          format.html { render :edit }
-          format.json { render json: @show.errors, status: :unprocessable_entity }
-        end
-      end
   end
 
   def synch
@@ -120,6 +105,8 @@ class ShowsController < ApplicationController
           runtime: serie_infos['Runtime'],
           rating: serie_infos['Rating'],
           status: serie_infos['Status'],
+          actors: serie_infos['Actors'],
+          genre: serie_infos['Genre'],
           idapi: serie_infos['seriesid']
         }
 
@@ -181,7 +168,7 @@ class ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status)
+    params.require(:show).permit(:name, :overview, :banner, :poster, :runtime, :network, :rating, :status, :actors, :genre)
   end
 
   def search_params

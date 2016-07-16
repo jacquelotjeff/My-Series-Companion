@@ -6,9 +6,10 @@
 		<h3>À l'affiche</h3>
 		<div class="slide_shows">
 			<% @shows.first(8).each do |show_trending| %>
+			<%=	show_trending.poster %>
 				<div class="col-md-1 trending_show">
 					<div class="black_bg">
-						<img class="img-responsive" src="<%= poster(show_trending) %>">
+						<img class="img-responsive" src="<%= banner(show_trending.poster) %>">
 						<p class="btn_add_show">Ajouter</p>
 					</div>
 					<p class="show_title"><%= show_trending.name %></p>
