@@ -14,9 +14,8 @@ class ShowsController < ApplicationController
     end 
     if params[:shows]
       @search_value = search_params[:search]
-      @shows = @shows.search(@search_value)
+      @shows = @shows.search(@search_value).paginate(:page => params[:page], :per_page => 7)
     end
-    @shows = Show.paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /shows/1
