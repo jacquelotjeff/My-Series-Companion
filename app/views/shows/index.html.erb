@@ -41,13 +41,13 @@
     <div class="col-xs-3 side-shows">
         <div class="btn-group pull-right shows-actions" role="group">
           <%= link_to show, :class => "btn btn-sm btn-success show" do %>
-          <span class="glyphicon glyphicon-eye-open"></span>
+            <span class="glyphicon glyphicon-eye-open"></span>
           <% end %>
-          <%= link_to synch_path(show), :class => "btn btn-sm btn-primary" do %>
-          <span class="glyphicon glyphicon-refresh"></span>
+          <%= link_to synch_path(show), :id => "synch_path", :class => "btn btn-sm btn-primary" do %>
+            <span class="glyphicon glyphicon-refresh"></span>
           <% end %>
           <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
-          <span class="glyphicon glyphicon-trash"></span>
+            <span class="glyphicon glyphicon-trash"></span>
           <% end %>
       </div>
         </div>

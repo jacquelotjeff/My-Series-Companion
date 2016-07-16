@@ -6,10 +6,9 @@
 <div class="col-xs-8 col-sm-offset-0 col-xs-offset-2">
   <h2><%= @show.name %> <%# link_to 'Éditer', edit_show_path(@show), class: 'btn btn-primary' %>
     <span class="pull-right">
-      <%= link_to synch_path(@show), :class => "btn btn-primary" do %>
+      <%= link_to synch_path(@show), :id => "synch_path", :class => "btn btn-primary" do %>
             <span class="glyphicon glyphicon-refresh"></span> Synchroniser
-            <% end %>
-      <%= link_to 'Retour à la liste', shows_path, class: 'btn btn-default' %>
+      <% end %>
     </span>
   </h2>
   <% if @show.status == 'Continuing' %>

@@ -1,0 +1,18 @@
+@font-face{font-family:appleLogo;src:local("Lucida Grande");unicode-range:U+F8FF}
+.tiny{font-size:.7rem}
+.small{font-size:.9rem}
+.no_pointer_events{pointer-events:none}
+#incoming_call{top:30%;text-align:center;width:220px;margin-left:-110px;background-color:rgba(28,28,28,.97);border-radius:5px;color:#fff}
+#incoming_call #incoming_call_window .title{font-size:.75rem;padding:12px 0 10px}
+#incoming_call #incoming_call_window .avatar_holder .member_image{border-radius:3px}
+#incoming_call #incoming_call_window .name_label_holder{font-size:1rem;padding:10px 0 13px}
+#incoming_call #incoming_call_window .button_holder{padding-bottom:20px}
+#incoming_call #incoming_call_window .button_holder a{border-radius:40px;width:45px;height:45px;display:inline-block;color:#fff;padding-top:13px;-webkit-app-region:no-drag}
+#incoming_call #incoming_call_window .button_holder a::before{font-size:1.6875rem}
+#incoming_call #incoming_call_window .button_holder a.accept{background-color:#2ab27b}
+#incoming_call #incoming_call_window .button_holder a.accept:hover{background-color:#3EC58E}
+#incoming_call #incoming_call_window .button_holder a.accept:active{background-color:#169E67}
+#incoming_call #incoming_call_window .button_holder a.reject{background-color:#cc2424;margin-right:8px}
+#incoming_call #incoming_call_window .button_holder a.reject::before{position:relative;top:2px}
+#incoming_call #incoming_call_window .button_holder a.reject:hover{background-color:#F44747}
+#incoming_call #incoming_call_window .button_holder a.reject:active{background-color:#BB1212}
