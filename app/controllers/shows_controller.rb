@@ -17,7 +17,6 @@ class ShowsController < ApplicationController
       @search_value = search_params[:search]
       shows = current_user.shows.search(@search_value)
     end
-
     @shows = shows.order('name asc').paginate(:page => params[:page], :per_page => 7)
   end
 

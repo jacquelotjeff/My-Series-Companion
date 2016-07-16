@@ -2,7 +2,7 @@
     <h3>Récemment ajoutée</h3>
     <div class="blog-stripe">
         <a href="<%= show_path(current_user.shows.last) %>">
-            <img src="<%= poster(current_user.shows.last) %>" alt="" class="feature img-responsive">
+            <img src="<%= banner(current_user.shows.last.poster, 'poster_serie') %>" alt="" class="feature img-responsive">
         </a>
     </div>
 </div>
@@ -32,11 +32,11 @@
   <% @shows.each do |show| %>
     <div class="col-xs-12 col-sm-7 col-md-12 shows-item">
       <div class="col-xs-3">
-        <img class="img-thumbnail img-responsive" src="<%= banner(show.banner) %>">
+        <img class="img-thumbnail img-responsive" src="<%= banner(show.banner, 'banner_serie') %>">
     </div>
     <div class="col-xs-6">
         <p><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>
-        <p class="author">Episode 6 - Saison 4</p>
+        <p class="author"></p>
     </div>
     <div class="col-xs-3 side-shows">
         <div class="btn-group pull-right shows-actions" role="group">
