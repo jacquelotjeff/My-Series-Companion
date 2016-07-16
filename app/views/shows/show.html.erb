@@ -49,7 +49,6 @@
           <% if @show.seasons.any? %>
             <% for season in @show.seasons %>
               <div class="tab-pane fade <% if season.num == 1 %>active in<% end %>" id="season<%= season.num %>">
-                <h3>Saison <%= season.num %></h3>
                 <% if season.episodes.any? %>
                     <% for episode in season.episodes %>
                       <div class="episode">
