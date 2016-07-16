@@ -7,16 +7,18 @@ class ShowsController < ApplicationController
   # GET /shows
   # GET /shows.json
   def index
-    @shows = current_user.shows.order('name asc').all
-
-    if @shows.empty?
+    shows = current_user.shows
+    
+    if shows.empty?
       redirect_to new_show_path
-    end 
+    end
+
     if params[:shows]
       @search_value = search_params[:search]
-      @shows = @shows.search(@search_value)
+      shows = current_user.shows.search(@search_value)
     end
-    @shows = Show.paginate(:page => params[:page], :per_page => 7)
+
+    @shows = shows.order('name asc').paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /shows/1
