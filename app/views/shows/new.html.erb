@@ -6,12 +6,20 @@
 		<h3>À l'affiche</h3>
 		<div class="slide_shows">
 			<% @shows.first(8).each do |show_trending| %>
-				<div class="col-md-1 trending_show" data-name="<%= show_trending.name %>">
-					<div class="black_bg">
-						<img class="img-responsive" src="<%= banner(show_trending.poster) %>">
-						<p class="btn_add_show">Ajouter</p>
-					</div>
-				</div>
+				<% @shows_user.each do |show_user| %>
+					<% if show_user != show_trending %>
+						<% if !show_trending.poster.nil? %>
+							<div class="col-md-1 trending_show" data-name="<%= show_trending.name %>">
+								<div class="black_bg">
+									<img class="img-responsive" src="<%= banner(show_trending.poster, 'new_poster') %>">
+									<p class="btn_add_show">Ajouter</p>
+								</div>
+							</div>
+						<% end %>
+					<% else %>
+					<p>Aucune série à vous proposer pour le moment.</p>
+					<% end %>
+				<% end %>
 			<% end %>
 		</div>
 	</div>
