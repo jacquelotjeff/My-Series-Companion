@@ -28,6 +28,7 @@ class ShowsController < ApplicationController
   # GET /shows/new
   def new
     @shows = Show.order('name asc').all
+    @shows_user = current_user.shows
     @show = Show.new
   end
 
