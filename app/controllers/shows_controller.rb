@@ -10,6 +10,7 @@ class ShowsController < ApplicationController
     shows = current_user.shows
     
     if shows.empty?
+      flash[:warning] = 'Veuillez ajouter votre première série avant de continuer.'
       redirect_to new_show_path
     end
 
@@ -76,8 +77,8 @@ class ShowsController < ApplicationController
   # DELETE /shows/1
   # DELETE /shows/1.json
   def destroy
-    userShow = UserShow.find_by user: current_user, show: @show
-    userShow.destroy
+    user_show = UserShow.find_by user: current_user, show: @show
+    user_show.destroy
     
       respond_to do |format|
         flash[:success] = 'La série a bien été supprimée.'

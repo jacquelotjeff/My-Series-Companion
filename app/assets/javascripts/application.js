@@ -9,3 +9,7 @@ $(document).ready(function() {
 		$('form.new_show').submit();
 	});	
 });
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

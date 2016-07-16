@@ -30,13 +30,17 @@
     <% end %>
   </div>
   <% @shows.each do |show| %>
+    <% user_episode = UserEpisode.where(['user_id = ?', current_user.id]).last %>
+    <% current_episode = user_episode.episode.number.to_s %>
+    <% current_season = user_episode.episode.season.num.to_s %>
+    <% current = "Saison #{current_season} Épisode #{current_episode}" %>
     <div class="col-xs-12 col-sm-7 col-md-12 shows-item">
       <div class="col-xs-3">
         <img class="img-thumbnail img-responsive" src="<%= banner(show.banner, 'banner_serie') %>">
     </div>
     <div class="col-xs-6">
         <p><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>
-        <p class="author"></p>
+        <p class="author"><%= current %></p>
     </div>
     <div class="col-xs-3 side-shows">
         <div class="btn-group pull-right shows-actions" role="group">

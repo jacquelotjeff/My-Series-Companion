@@ -1,15 +1,28 @@
 class EpisodesController < ApplicationController
-  before_action :set_params, only: [:viewed]
+  before_action :set_params, only: [:viewed, :unviewed]
 
   def viewed
-    if @episode.users[current_user.id].present?
-      flash[:danger] = 'Il semblerait que vous ayez déjà regardé l\'épisode.'
-    else
-      @episode.users << current_user
-      @episode.save
-      flash[:success] = 'Les modifications ont bien été prises en compte.'
-    end
+    @episode.users << current_user
+    @episode.save
+    flash[:success] = 'L\'épisode a bien été marqué comme vu.'
     
+    respond_to do |format|
+        format.html { redirect_to @show }
+        format.json { render :show, status: :ok, location: @show }
+    end
+  end
+
+  def unviewed
+    user_episode = UserEpisode.find_by user: current_user, episode: @episode
+    user_episode.destroy
+
+    puts '///////////////////'
+    puts 'Controlleur test de suppression'
+    puts user_episode.inspect
+    puts '///////////////////'
+
+    flash[:success] = 'L\'épisode a bien été marqué comme non vu.'
+
     respond_to do |format|
         format.html { redirect_to @show }
         format.json { render :show, status: :ok, location: @show }
