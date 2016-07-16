@@ -1,7 +1,11 @@
 .lecteur:hover {
 	cursor:pointer;
 }
-
+.ledcteur{
+	img{
+		max-height:400px
+	}
+}
 .serie-desc {
 	text-transform:uppercase;
 	color:#aaa;
@@ -38,7 +42,7 @@
 }
 
 .valided{
-	color: #00ff00;
+	color: #4CAF50;
 }
 
 .tab-pane{
