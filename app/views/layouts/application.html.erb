@@ -27,9 +27,8 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<% if user_signed_in? %>
 					<ul class="nav navbar-nav">
-						<li>
-							<%= link_to 'Mes séries', shows_path %>
-						</li>
+						<li class="<% if current_page?(shows_path) %>active<% end %>"><%= link_to 'Mes séries', shows_path %></li>
+						<li class="<% if current_page?(new_show_path) %>active<% end %>"><%= link_to 'Nouvelle série', new_show_path %></li>
 					</ul>
 					<div class="navbar-right">
 						<p class="navbar-text">Bienvenue <%= current_user.email %></p>

@@ -1,5 +1,4 @@
 <% @ratings = rating.to_f / 2 %>
-
-<% for rate in 0..@ratings %>
+<% for rate in 1..@ratings.round %>
   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 <% end %>

@@ -16,6 +16,7 @@ class ShowsController < ApplicationController
       @search_value = search_params[:search]
       @shows = @shows.search(@search_value)
     end
+    @shows = Show.paginate(:page => params[:page], :per_page => 7)
   end
 
   # GET /shows/1
