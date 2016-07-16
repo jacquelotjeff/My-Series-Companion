@@ -110,7 +110,7 @@ class ShowsController < ApplicationController
           status: serie_infos['Status'],
           actors: serie_infos['Actors'],
           genre: serie_infos['Genre'],
-          idapi: serie_infos['seriesid']
+          idapi: serie_infos['id']
         }
 
         show = create_show show_informations
@@ -158,11 +158,12 @@ class ShowsController < ApplicationController
   # Check if current user has already the show, if not add show in user shows
   def add_show_to_current_user(show)
     exist = UserShow.find_by user: current_user, show: show
-    if exist
-      flash[:danger] = 'Cette série est déjà dans votre liste.'
-    else
+
+    if exist.nil?
       current_user.shows << show  
       flash[:success] = 'La série a bien été ajoutée à votre liste.'
+    else
+      flash[:danger] = 'Cette série est déjà dans votre liste.'
     end
   end
 

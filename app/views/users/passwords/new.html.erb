@@ -1,12 +1,16 @@
-<div class="module form-module">
-  <div class="form">
-    <h2>Mot de passe oublié?</h2>
-		<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  		<%= f.error_notification %>
-  		<%= f.input :email, required: true, autofocus: true %>
-     	<%= f.button :submit, "Envoyez-moi les instructions" %>
-    <% end %>
-  </div>
-  <div class="cta"><a href="#"><%= render "users/shared/links" %></a></div>
+<div class="col-md-6">
+	<div class="module form-module">
+	  <div class="form">
+	    <h2>Mot de passe oublié?</h2>
+			<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+	  		<%= f.error_notification %>
+	  		<%= f.input :email, required: true, autofocus: true %>
+	     	<%= f.button :submit, "Envoyez-moi les instructions" %>
+	    <% end %>
+	  </div>
+	  <div class="cta"><a href="#"><%= render "users/shared/links" %></a></div>
+	</div>
 </div>
-
+<div class="col-md-6">
+  <%= render partial: 'users/informations', locals: { type: 'login' } %>
+</div>
