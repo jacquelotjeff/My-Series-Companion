@@ -2,7 +2,7 @@
     <h3>Votre dernière série</h3>
     <div class="blog-stripe">
         <a href="<%= show_path(current_user.shows.last) %>">
-            <img src="<%= banner(current_user.shows.last.poster, 'poster_serie') %>" alt="" class="feature img-responsive">
+            <img src="<%= banner(current_user.shows.last.poster, 'poster_serie', current_user.shows.last.name) %>" alt="" class="feature img-responsive">
         </a>
     </div>
 </div>
@@ -32,7 +32,7 @@
   <% @shows.each do |show| %>
     <div class="col-xs-12 col-sm-7 col-md-12 shows-item">
       <div class="col-xs-3">
-        <img class="img-thumbnail img-responsive" src="<%= banner(show.banner, 'banner_serie') %>">
+        <img class="img-thumbnail img-responsive" src="<%= banner(show.banner, 'banner_serie', show.name) %>">
     </div>
     <div class="col-xs-6">
         <p><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>

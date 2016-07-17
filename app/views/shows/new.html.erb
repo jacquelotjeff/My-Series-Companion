@@ -8,7 +8,7 @@
 			<% @shows.first(8).each do |show_trending| %>
 				<div class="col-md-1 trending_show" data-name="<%= show_trending.name %>">
 					<div class="black_bg">
-						<img class="img-responsive" src="<%= banner(show_trending.poster, 'new_poster') %>">
+						<img class="img-responsive" src="<%= banner(show_trending.poster, 'new_poster', show_trending.name) %>">
 						<p class="btn_add_show">Ajouter</p>
 					</div>
 				</div>

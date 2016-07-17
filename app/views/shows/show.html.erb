@@ -1,6 +1,6 @@
 <div class="col-sm-4 hidden-xs">
   <div class="lecteur">
-    <img class="img-thumbnail img-responsive" src="<%= banner(@show.poster, 'small_poster') %>">
+    <img class="img-thumbnail img-responsive" src="<%= banner(@show.poster, 'small_poster', @show.name) %>">
   </div>
 </div>
 <div class="col-xs-8 col-sm-offset-0 col-xs-offset-2">
@@ -55,7 +55,7 @@
                     <% for episode in season.episodes %>
                       <div class="episode col-md-12">
                         <div class="col-md-2 hidden-xs">
-                            <img class="img-thumbnail img-responsive" src="<%= banner(episode.filename, 'banner_episode') %>">
+                            <img class="img-thumbnail img-responsive" src="<%= banner(episode.filename, 'banner_episode', episode.name) %>">
                         </div>
                         <div class="col-md-8 episode-desc">
                           <h4>Épisode <%= episode.number %> : <%= episode.name %></h4>
