@@ -2,6 +2,7 @@
 	<div class="col-md-12">
 		<h1>Ajoutez une série à votre collection</h1>
 	</div>
+	<% if @shows.any? %>
 	<div class="col-md-12">
 		<h3>À l'affiche</h3>
 		<div class="slide_shows">
@@ -15,6 +16,8 @@
 			<% end %>
 		</div>
 	</div>
+	<% end %>
+	
 	<div class="col-md-6">
 		<%= simple_form_for(@show) do |f| %>
 		    <%= f.error_notification %>

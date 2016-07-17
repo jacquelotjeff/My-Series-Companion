@@ -16,14 +16,14 @@
 }
 
 .episode {
-	border-bottom:1px solid #ccc;
+	border-bottom: 1px solid rgba(221, 221, 221, 0.35);
 	transition:0.3s;
 	min-height: 140px;
 	display: table;
 	padding: 7px;
 }
 .episode:hover {
-	background-color:#ddd;
+	background-color:#f7f7f7;
 }
 .episode img {
 	margin-top: 10px;
