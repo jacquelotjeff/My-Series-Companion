@@ -8,7 +8,7 @@
   <h2><%= @show.name %>
     <span class="pull-right">
       <%= link_to synch_path(@show), :id => "synch_path", :class => "btn btn-primary" do %>
-            <span class="glyphicon glyphicon-refresh"></span> Synchroniser
+            <span class="fa fa-refresh"></span> Synchroniser
       <% end %>
     </span>
   </h2>
@@ -61,9 +61,9 @@
                         </div>
                         <div class="col-md-2">
                             <% if current_user.episodes.find_by_id(episode.id).present? %>
-                              <%= link_to '', unviewed_path(@show.id, episode.id), class: "glyphicon glyphicon-eye-open btn btn-default pull-right valid-episode valided", :data => { :toggle =>"tooltip", :placement => "left" }, :title => 'Marquer comme non vu' %>
+                              <%= link_to '', unviewed_path(@show.id, episode.id), class: "fa fa-eye btn btn-default pull-right valid-episode valided", :data => { :toggle =>"tooltip", :placement => "left" }, :title => 'Marquer comme non vu' %>
                             <% else %>
-                              <%= link_to '', viewed_path(@show.id, episode.id), class: "glyphicon glyphicon-eye-open btn btn-default pull-right valid-episode", :data => { :toggle =>"tooltip", :placement => "left" }, :title => 'Marquer comme vu' %>
+                              <%= link_to '', viewed_path(@show.id, episode.id), class: "fa fa-eye-slash btn btn-default pull-right valid-episode", :data => { :toggle =>"tooltip", :placement => "left" }, :title => 'Marquer comme vu' %>
                             <% end %>
                         </div>
                     </div>
