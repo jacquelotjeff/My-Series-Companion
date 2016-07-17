@@ -49,14 +49,12 @@
 	</nav>
 	<div class="content-website">
 		<div class="container">
-			<%# Alerts message for Devise %>
+			<%# Alerts message %>
 			<% flash.each do |name, msg| -%>
-			<div class="col-md-12">
 				<div class="alert alert-info alert-<%= name %>">
 					<a class="close" data-dismiss="alert">x</a>
 					<%= content_tag :div, msg, id: "flash_#{name}" %>
 				</div>
-			</div>
 			<% end %>
 			<%# Yield allows override page content %>
 			<%= yield %>
