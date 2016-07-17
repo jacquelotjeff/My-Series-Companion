@@ -49,7 +49,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
       if @show.nil?
         flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
-        redirect_to shows_path
+        redirect_to new_show_path
         return []
       end
 
@@ -75,7 +75,7 @@ class ShowsController < ApplicationController
 
     update_episodes_for_show(@show, episodes)
 
-    flash[:success] = 'Votre série a bien été mise à jour.'
+    flash[:success] = 'Votre série est maintenant synchronisée.'
 
     redirect_to @show
   end
