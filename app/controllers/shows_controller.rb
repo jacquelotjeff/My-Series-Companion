@@ -30,22 +30,15 @@ class ShowsController < ApplicationController
   # GET /shows/new
   def new
     @user_shows = current_user.shows
-
-    ids = @user_shows.map(&:id).join(',').split(',')
-
-    @shows = Show.where.not(id: [ids]).order('name asc')
-
-    puts(@shows)
-    @show = Show.new
+    ids         = @user_shows.map(&:id).join(',').split(',')
+    @shows      = Show.where.not(id: [ids]).order('name asc')
+    @show       = Show.new
   end
 
   # POST /shows
   # POST /shows.json
   def create
     @show = search_show params[:show][:name]
-
-    #puts @show.inspect
-
     respond_to do |format|
       if @show.nil?
         flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
@@ -66,13 +59,7 @@ class ShowsController < ApplicationController
 
   def synch
     api_show_service = ApiShowService.new()
-    episodes = api_show_service.get_all_episodes(@show.idapi)
-
-    puts '///////////////////'
-    puts 'controller'
-    puts episodes.inspect
-    puts '///////////////////'
-
+    episodes         = api_show_service.get_all_episodes(@show.idapi)
     update_episodes_for_show(@show, episodes)
 
     flash[:success] = 'Votre série est maintenant synchronisée.'
@@ -97,12 +84,10 @@ class ShowsController < ApplicationController
 
   def search_show(serie_name)
     api_show_service = ApiShowService.new()
-    # TODO ESCAPE
     search = api_show_service.search(params[:show][:name])
 
     if search.any?
       exist = Show.find_by idapi: search['Series']['id']
-
       if exist
         show = exist
       else
