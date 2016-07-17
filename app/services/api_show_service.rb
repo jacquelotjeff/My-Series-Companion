@@ -8,13 +8,17 @@ class ApiShowService
   end
 
   def search(serie_name)
-    options = { query: {seriesname: serie_name, language: 'fr'} }
+    options = { query: { seriesname: serie_name, language: 'fr' } }
     response = self.class.get('/GetSeries.php', options)
-    
+
     if response['Data'].blank? || response['Data']['Series'].blank?
         return []
     else
-      get_all_infos response['Data']['Series'].first['seriesid']
+      if response['Data']['Series'].first[0].present?
+        get_all_infos response['Data']['Series'].first[1]
+      else
+        get_all_infos response['Data']['Series'].first['seriesid']
+      end
     end
   end
 

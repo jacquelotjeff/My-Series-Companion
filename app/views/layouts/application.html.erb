@@ -66,13 +66,19 @@
       	</div>
     </footer>
     <script type="text/javascript">
-    	
-		var div = '<div id="center-loader"><div class="loader"><h3>Nous recherchons votre série...</h3><%= image_tag("loader.gif") %><p>Veuillez patienter...</p></div></div>';
-		$('form#new_show').on('submit', function(){
-		    $('body').append(div);
+    	function add_loader(text) {
+    		div = '<div id="center-loader"><div class="loader"><h3>'+text+'</h3><%= image_tag("loader.gif") %><p>Veuillez patienter...</p></div></div>';
+
+    		$('body').append(div);
+    	}
+
+		$('form#new_show').on('submit', function() {
+			text = 'Nous recherchons votre série...';
+			add_loader(text);
 		});
-		$('#synch_path').on('click', function(){
-		    $('body').append(div);
+		$('#synch_path').on('click', function() {
+			text = 'Nous synchronisons votre série...';
+			add_loader(text);
 		});
     </script>
 </body>

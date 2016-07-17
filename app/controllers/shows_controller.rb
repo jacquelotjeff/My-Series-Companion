@@ -1,5 +1,6 @@
 class ShowsController < ApplicationController
   require 'api_show_service'
+  require 'cgi'
 
   before_action :set_show, only: [:show, :synch, :destroy]
   before_action :authenticate_user!
@@ -91,6 +92,7 @@ class ShowsController < ApplicationController
 
   def search_show(serie_name)
     api_show_service = ApiShowService.new()
+    # TODO ESCAPE
     search = api_show_service.search(params[:show][:name])
 
     if search.any?
