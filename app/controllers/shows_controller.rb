@@ -1,5 +1,6 @@
 class ShowsController < ApplicationController
   require 'api_show_service'
+  require 'cgi'
 
   before_action :set_show, only: [:show, :synch, :destroy]
   before_action :authenticate_user!
@@ -10,6 +11,7 @@ class ShowsController < ApplicationController
     shows = current_user.shows
     
     if shows.empty?
+      flash[:warning] = 'Veuillez ajouter votre première série avant de continuer.'
       redirect_to new_show_path
     end
 
@@ -47,7 +49,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
       if @show.nil?
         flash[:danger] = 'Désolé, la série n\'a pas été trouvée.'
-        redirect_to shows_path
+        redirect_to new_show_path
         return []
       end
 
@@ -73,7 +75,7 @@ class ShowsController < ApplicationController
 
     update_episodes_for_show(@show, episodes)
 
-    flash[:success] = 'Votre série a bien été mise à jour.'
+    flash[:success] = 'Votre série est maintenant synchronisée.'
 
     redirect_to @show
   end
@@ -81,8 +83,8 @@ class ShowsController < ApplicationController
   # DELETE /shows/1
   # DELETE /shows/1.json
   def destroy
-    userShow = UserShow.find_by user: current_user, show: @show
-    userShow.destroy
+    user_show = UserShow.find_by user: current_user, show: @show
+    user_show.destroy
     
       respond_to do |format|
         flash[:success] = 'La série a bien été supprimée.'
@@ -95,6 +97,7 @@ class ShowsController < ApplicationController
 
   def search_show(serie_name)
     api_show_service = ApiShowService.new()
+    # TODO ESCAPE
     search = api_show_service.search(params[:show][:name])
 
     if search.any?
