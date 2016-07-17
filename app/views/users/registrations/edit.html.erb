@@ -12,7 +12,7 @@
 
     <%= f.input :password, autocomplete: "off", hint: "Merci de le laisser ce champ blanc si vous ne voulez pas changer votre mot de passe", required: false %>
     <%= f.input :password_confirmation, required: false %>
-    <%= f.input :current_password, hint: "Veuillez confirmer votre mot de passe si vous souhaitez le changer", required: true %>
+    <%= f.input :current_password, hint: "Veuillez confirmer votre mot de passe pour valider les changements", required: true %>
   </div>
 
   <div class="form-actions">
@@ -23,5 +23,5 @@
 <div class="col-md-4">
   <h3>Supprimer votre compte</h3>
 
-  <p>Vous souhaitez supprimer votre compte? <%= link_to "Cliquez ici", registration_path(resource_name), data: { confirm: "Êtes-vous certain ?" }, method: :delete %></p>
+  <p>Vous souhaitez supprimer votre compte ? <%= link_to "Cliquez ici", registration_path(resource_name), data: { confirm: "Êtes-vous certain ?" }, method: :delete %></p>
 </div>

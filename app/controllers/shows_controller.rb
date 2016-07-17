@@ -27,8 +27,13 @@ class ShowsController < ApplicationController
 
   # GET /shows/new
   def new
-    @shows = Show.order('name asc').all
-    @shows_user = current_user.shows
+    @user_shows = current_user.shows
+
+    ids = @user_shows.map(&:id).join(',').split(',')
+
+    @shows = Show.where.not(id: [ids]).order('name asc')
+
+    puts(@shows)
     @show = Show.new
   end
 
