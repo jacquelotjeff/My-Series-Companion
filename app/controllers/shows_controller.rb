@@ -141,21 +141,26 @@ class ShowsController < ApplicationController
       end
 
       episode_infos = {
-        name: episode['EpisodeName'],
         number: episode['EpisodeNumber'],
+        season: season
+      }
+
+      fields_infos = {
+        name: episode['EpisodeName'],
         firstaired: episode['FirstAired'],
         overview: episode['Overview'],
         rating: episode['Rating'],
         ratingcount: episode['RatingCount'],
-        filename: episode['filename'],
-        season: season
+        filename: episode['filename']
       }
 
       episode = Episode.find_by(episode_infos)
-
-      if episode.nil? && !episode_infos[:name].nil?
+      if episode.nil? && !fields_infos[:name].nil?
         episode = Episode.create(episode_infos)
       end
+
+      # Update episode
+      Episode.update(episode.id, fields_infos)
     end
   end
 

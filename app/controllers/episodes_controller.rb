@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
   def viewed
     @episode.users << current_user
     @episode.save
-    flash[:success] = 'L\'épisode a bien été marqué comme vu.'
+    flash[:success] = 'L\'épisode est maintenant marqué comme vu.'
     
     respond_to do |format|
         format.html { redirect_to @show }
@@ -16,12 +16,7 @@ class EpisodesController < ApplicationController
     user_episode = UserEpisode.find_by user: current_user, episode: @episode
     user_episode.destroy
 
-    puts '///////////////////'
-    puts 'Controlleur test de suppression'
-    puts user_episode.inspect
-    puts '///////////////////'
-
-    flash[:success] = 'L\'épisode a bien été marqué comme non vu.'
+    flash[:success] = 'L\'épisode est maintenant marqué comme non vu.'
 
     respond_to do |format|
         format.html { redirect_to @show }
