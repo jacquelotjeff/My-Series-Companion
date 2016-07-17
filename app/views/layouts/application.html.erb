@@ -12,8 +12,7 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="container">
-		<nav class="navbar navbar-inverse navbar-fixed-top" id="header-nav">
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="header-nav">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -48,19 +47,20 @@
 			</div>
 		</div>
 	</nav>
-	<div class="row content-website">
-		<%# Alerts message for Devise %>
-		<% flash.each do |name, msg| -%>
-		<div class="col-md-12">
-			<div class="alert alert-info alert-<%= name %>">
-				<a class="close" data-dismiss="alert">x</a>
-				<%= content_tag :div, msg, id: "flash_#{name}" %>
+	<div class="content-website">
+		<div class="container">
+			<%# Alerts message for Devise %>
+			<% flash.each do |name, msg| -%>
+			<div class="col-md-12">
+				<div class="alert alert-info alert-<%= name %>">
+					<a class="close" data-dismiss="alert">x</a>
+					<%= content_tag :div, msg, id: "flash_#{name}" %>
+				</div>
 			</div>
+			<% end %>
+			<%# Yield allows override page content %>
+			<%= yield %>
 		</div>
-		<% end %>
-		<%# Yield allows override page content %>
-		<%= yield %>
-	</div>
 	</div>
 	<footer class="footer">
       	<div class="container">
