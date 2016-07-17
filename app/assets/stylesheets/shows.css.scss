@@ -52,8 +52,19 @@
 	padding-top:15px;
 	padding-bottom:15px;
 
+	img {
+	    -webkit-transition: all 1s ease; /* Safari and Chrome */
+	    -moz-transition: all 1s ease; /* Firefox */
+	    -ms-transition: all 1s ease; /* IE 9 */
+	    -o-transition: all 1s ease; /* Opera */
+	    transition: all 1s ease;
+	}
+
 	p {
 		margin: 0px;
+	}
+	.show-title {
+		color:#333;
 	}
 }
 .rating{
@@ -77,6 +88,14 @@
 		a {
 			transition: 1s;
 		}
+	}
+
+	img {
+	    -webkit-transform:scale(1.08); /* Safari and Chrome */
+	    -moz-transform:scale(1.08); /* Firefox */
+	    -ms-transform:scale(1.08); /* IE 9 */
+	    -o-transform:scale(1.08); /* Opera */
+	     transform:scale(1.08);
 	}
 }
 

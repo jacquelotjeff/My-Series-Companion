@@ -37,29 +37,32 @@
       <% current_episode = user_episode.episode.number.to_s %>
       <% current_season = user_episode.episode.season.num.to_s %>
       <% current = "Saison #{current_season} Épisode #{current_episode}" %>
-      <div class="col-xs-12 col-sm-12 col-md-12 shows-item">
-        <div class="col-xs-3">
-          <img class="img-thumbnail img-responsive" src="<%= banner(show.banner, 'banner_serie', show.name) %>">
-      </div>
-      <div class="col-xs-6">
-          <p><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>
-          <p class="author"><%= current %></p>
-      </div>
-      <div class="col-xs-3 side-shows">
-          <div class="btn-group pull-right shows-actions" role="group">
-            <%= link_to show, :class => "btn btn-sm btn-success show" do %>
-              <span class="fa fa-eye"></span>
-            <% end %>
-            <%= link_to synch_path(show), :class => "synch_path btn btn-sm btn-primary" do %>
-              <span class="fa fa-refresh"></span>
-            <% end %>
-            <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
-              <span class="fa fa-trash"></span>
-            <% end %>
-        </div>
+      <%= link_to show do %>
+        <div class="col-xs-12 col-sm-12 col-md-12 shows-item">
+          <div class="col-xs-3">
+            <div class="img-thumbnail overflow-hidden">
+              <img class="img-responsive" src="<%= banner(show.banner, 'banner_serie', show.name) %>">
+            </div>
           </div>
-      </div>
-
+          <div class="col-xs-6">
+              <p class="show-title"><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>
+              <p class="author"><%= current %></p>
+          </div>
+          <div class="col-xs-3 side-shows">
+              <div class="btn-group pull-right shows-actions" role="group">
+                <%= link_to show, :class => "btn btn-sm btn-success show" do %>
+                  <span class="fa fa-eye"></span>
+                <% end %>
+                <%= link_to synch_path(show), :class => "synch_path btn btn-sm btn-primary" do %>
+                  <span class="fa fa-refresh"></span>
+                <% end %>
+                <%= link_to show, method: :delete, data: { confirm: 'Êtes-vous certain de vouloir supprimer cette série?' }, :class => "btn btn-sm btn-danger delete" do %>
+                  <span class="fa fa-trash"></span>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
     <div class="col-md-12">
       <div class="pull-right">
