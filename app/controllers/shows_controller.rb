@@ -19,7 +19,7 @@ class ShowsController < ApplicationController
       @search_value = search_params[:search]
       shows = current_user.shows.search(@search_value)
     end
-    @shows = shows.order('name asc').paginate(:page => params[:page], :per_page => 7)
+    @shows = shows.order('name asc').paginate(:page => params[:page], :per_page => 7).includes(:users, :seasons)
   end
 
   # GET /shows/1
@@ -144,8 +144,10 @@ class ShowsController < ApplicationController
         episode = Episode.create(episode_infos)
       end
 
-      # Update episode
-      Episode.update(episode.id, fields_infos)
+      if episode.present?
+        # Update episode
+        Episode.update(episode.id, fields_infos)
+      end
     end
   end
 

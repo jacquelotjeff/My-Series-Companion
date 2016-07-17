@@ -2,7 +2,7 @@
   <div class="col-md-12">
       <h2><%= @show.name %>
       <span class="pull-right">
-        <%= link_to synch_path(@show), :id => "synch_path", :class => "btn btn-primary" do %>
+        <%= link_to synch_path(@show), :class => "btn btn-primary synch_path" do %>
               <span class="fa fa-refresh"></span> Synchroniser
         <% end %>
       </span>

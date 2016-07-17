@@ -33,10 +33,14 @@
       </div>
     </div>
     <% @shows.each do |show| %>
-      <% user_episode = UserEpisode.where(['user_id = ?', current_user.id]).last %>
-      <% current_episode = user_episode.episode.number.to_s %>
-      <% current_season = user_episode.episode.season.num.to_s %>
-      <% current = "Saison #{current_season} Épisode #{current_episode}" %>
+      <% user_episode = UserEpisode.joins(episode: :season).where(['user_episodes.user_id = ? AND seasons.show_id = ?', current_user.id, show.id]).last %>
+      <% if user_episode.nil? %>
+        <% episode_to_show = '' %>
+      <% else %>
+        <% current_episode = user_episode.episode.number.to_s %>
+        <% current_season = user_episode.episode.season.num.to_s %>
+        <% episode_to_show = "Saison #{current_season} Épisode #{current_episode}" %>
+      <% end %>
       <%= link_to show do %>
         <div class="col-xs-12 col-sm-12 col-md-12 shows-item">
           <div class="col-xs-3">
@@ -46,7 +50,7 @@
           </div>
           <div class="col-xs-6">
               <p class="show-title"><%= show.name %> <span class="rating"><%= render partial: 'shows/rating', locals: { rating: show.rating } %></span></p>
-              <p class="author"><%= current %></p>
+              <p class="author"><%= episode_to_show %></p>
           </div>
           <div class="col-xs-3 side-shows">
               <div class="btn-group pull-right shows-actions" role="group">
