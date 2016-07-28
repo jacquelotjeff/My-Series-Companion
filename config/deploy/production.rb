@@ -7,9 +7,12 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
-role :app, %w{myseriescompanion@ns504906.ip-192-99-12.net}
-role :web, %w{myseriescompanion@ns504906.ip-192-99-12.net}
-role :db,  %w{myseriescompanion@ns504906.ip-192-99-12.net}
+# role :app, %w{myseriescompanion@ns504906.ip-192-99-12.net}
+# role :web, %w{myseriescompanion@ns504906.ip-192-99-12.net}
+# role :db,  %w{myseriescompanion@ns504906.ip-192-99-12.net}
+
+server "192.99.12.56", user: "myseriescompanion", roles: %w{web app db}, port: 8031
+
 
 #server 'ns504906.ip-192-99-12.net', user: 'myseriescompanion', roles: %w{web app db}, my_property: :my_value
 

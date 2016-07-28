@@ -51,7 +51,7 @@ group :development do
   gem 'capistrano-rails'
 
   # Remove the following if your server does not use RVM
-  #gem 'capistrano-rvm'
+  gem 'capistrano-rvm'
 end
 
 group :development, :test do
